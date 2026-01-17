@@ -1,20 +1,10 @@
 import { fetchPortfolio } from '@/lib/api';
-import About from './components/About';
-import Tabs from './components/Tabs';
-import Footer from './components/Footer';
+import HomeClient from '@/components/HomeClient';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default async function Home() {
   const data = await fetchPortfolio();
-
-  return (
-    <main>
-      <About data={data.about} />
-      <Tabs
-        projects={data.projects}
-        experience={data.experience}
-        education={data.education}
-      />
-      <Footer social={data.social} />
-    </main>
-  );
+  return <HomeClient data={data} />;
 }

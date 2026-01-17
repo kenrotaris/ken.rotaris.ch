@@ -1,34 +1,26 @@
-import { headers } from 'next/headers';
+import fs from 'fs';
+import path from 'path';
+import yaml from 'js-yaml';
 import { Portfolio } from './types';
-
-/**
- * Derives the base URL from request headers.
- * Respects x-forwarded-proto set by Traefik for HTTPS correctness.
- */
-export async function getBaseUrl(): Promise<string> {
-  const headersList = await headers();
-
-  const protocol = headersList.get('x-forwarded-proto') || 'http';
-  const host = headersList.get('host');
-
-  if (!host) {
-    throw new Error('Unable to determine host from request headers');
-  }
-
-  return `${protocol}://${host}`;
-}
+import { DEFAULT_PORTFOLIO } from './config';
 
 export async function fetchPortfolio(): Promise<Portfolio> {
-  const baseUrl = await getBaseUrl();
-  const apiUrl = `${baseUrl}/api/portfolio`;
+  const filePath = process.env.PORTFOLIO_PATH || path.join(process.cwd(), 'public', 'data', 'portfolio.yaml');
 
-  const res = await fetch(apiUrl, {
-    cache: 'no-store',
-  });
+  try {
+    const fileContents = await fs.promises.readFile(filePath, 'utf8');
+    const data = yaml.load(fileContents) as Portfolio;
 
-  if (!res.ok) {
-    throw new Error(`Failed to fetch portfolio: ${res.statusText}`);
+    // Return data with defaults for missing fields
+    return {
+      hero: data.hero || DEFAULT_PORTFOLIO.hero,
+      tabs: data.tabs || DEFAULT_PORTFOLIO.tabs,
+      footer: data.footer,
+      theme: data.theme || DEFAULT_PORTFOLIO.theme,
+    };
+  } catch (e) {
+    console.error(`Error reading portfolio data from ${filePath}:`, e);
+    console.warn('Using default portfolio configuration');
+    return DEFAULT_PORTFOLIO;
   }
-
-  return res.json();
 }

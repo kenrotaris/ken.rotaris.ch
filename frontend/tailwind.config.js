@@ -6,33 +6,31 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-inter)', 'sans-serif'],
+        display: ['var(--font-outfit)', 'sans-serif'],
+      },
       colors: {
-        'teal-accent': '#14b8a6',
-        'dark-bg': '#0f172a',
-        'dark-surface': '#1e293b',
-        'dark-card': '#334155',
+        'teal-accent': 'var(--color-accent)',
+      },
+      animation: {
+        'blob': 'blob 10s infinite',
+        'fade-in': 'fadeIn 0.5s ease-out forwards',
+      },
+      keyframes: {
+        blob: {
+          '0%': { transform: 'translate(0px, 0px) scale(1)' },
+          '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+          '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+          '100%': { transform: 'translate(0px, 0px) scale(1)' },
+        },
+        fadeIn: {
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
       },
     },
   },
-  plugins: [require("daisyui")],
-  daisyui: {
-    themes: [
-      {
-        dark: {
-          "primary": "#14b8a6",
-          "secondary": "#1e293b",
-          "accent": "#14b8a6",
-          "neutral": "#1e293b",
-          "base-100": "#0f172a",
-          "base-200": "#1e293b",
-          "base-300": "#334155",
-          "info": "#3abff8",
-          "success": "#36d399",
-          "warning": "#fbbd23",
-          "error": "#f87272",
-        },
-      },
-    ],
-  },
+  plugins: [],
 }
 

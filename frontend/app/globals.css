@@ -2,34 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --teal-accent: #14b8a6;
-  --dark-bg: #0f172a;
-  --dark-surface: #1e293b;
-  --dark-text: #f1f5f9;
+@layer base {
+  body {
+    @apply bg-black text-gray-100 antialiased min-h-screen;
+    /* overflow-x-hidden; Removed to fix sticky positioning */
+  }
+
+  html {
+    scrollbar-width: none;
+    /* overflow-x: hidden;  Removed to fix sticky positioning */
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
 }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: var(--dark-bg);
-  color: var(--dark-text);
-  margin: 0;
-  padding: 0;
-}
+@layer utilities {
+  .glass {
+    @apply bg-white/[0.02] backdrop-blur-sm;
+  }
 
-/* Custom teal accent utilities */
-.text-teal {
-  color: var(--teal-accent);
-}
+  .glass-border {
+    @apply border border-white/5;
+  }
 
-.bg-teal {
-  background-color: var(--teal-accent);
-}
+  .glass-hover {
+    @apply hover:bg-white/[0.04];
+  }
 
-.border-teal {
-  border-color: var(--teal-accent);
-}
+  .glass-strong {
+    @apply bg-white/[0.05] backdrop-blur-md;
+  }
 
-.hover\:bg-teal:hover {
-  background-color: var(--teal-accent);
+  .glass-dark {
+    @apply bg-black/20 backdrop-blur-sm;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }

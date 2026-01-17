@@ -2,6 +2,9 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,20 +12,26 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "autoprefixer": "^10.4.23",
-    "daisyui": "^5.5.14",
+    "@types/js-yaml": "~4.0.9",
+    "autoprefixer": "~10.4.23",
+    "framer-motion": "~12.26.1",
+    "js-yaml": "~4.1.1",
+    "lucide-react": "~0.562.0",
     "next": "16.1.1",
-    "postcss": "^8.5.6",
+    "postcss": "~8.5.6",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "tailwindcss": "^3.4.19"
+    "sharp": "~0.34.5",
+    "tailwindcss": "~3.4.19",
+    "three": "^0.121.0",
+    "vanta": "^0.5.24"
   },
   "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
+    "@types/node": "~20",
+    "@types/react": "~19",
+    "@types/react-dom": "~19",
+    "eslint": "~9",
     "eslint-config-next": "16.1.1",
-    "typescript": "^5"
+    "typescript": "~5"
   }
 }
