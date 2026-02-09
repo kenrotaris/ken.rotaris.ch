@@ -31,19 +31,17 @@ export default function About({ data }: AboutProps) {
   return (
     <section className="min-h-screen flex items-center justify-center pt-20 relative">
       <div className="max-w-4xl mx-auto text-center px-6 pb-16">
-        {data.profileImage && (
-          <div className="mb-8 flex justify-center">
-            <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden relative">
-              <Image
-                src={data.profileImage}
-                alt={data.name || 'Profile'}
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
+        <div className="mb-8 flex justify-center">
+          <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden relative">
+            <Image
+              src="/images/profile.png"
+              alt={data.name || 'Profile'}
+              fill
+              className="object-cover"
+              priority
+            />
           </div>
-        )}
+        </div>
 
         <div className="space-y-4">
           {data.name && (

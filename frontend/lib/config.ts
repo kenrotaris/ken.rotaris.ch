@@ -17,7 +17,6 @@ export const DEFAULT_PORTFOLIO: Portfolio = {
     name: 'Portfolio',
     title: 'Professional',
     bio: 'Welcome to my portfolio',
-    profileImage: '/images/profile.png',
   },
   tabs: [],
   theme: DEFAULT_THEME,

@@ -7,10 +7,10 @@ import About from '@/components/About';
 import Tabs from '@/components/Tabs';
 import Footer from '@/components/Footer';
 import Background from '@/components/Background';
-import { Portfolio } from '@/lib/types';
+import { NormalizedPortfolio } from '@/lib/data';
 
 interface HomeClientProps {
-  data: Portfolio;
+  data: NormalizedPortfolio;
 }
 
 export default function HomeClient({ data }: HomeClientProps) {
@@ -26,7 +26,8 @@ export default function HomeClient({ data }: HomeClientProps) {
       <Background accentColor={backgroundColor} />
       <Header
         email={data.footer?.social?.email || data.hero?.email}
-        resumeUrl={data.hero?.resumeUrl}
+        website={data.hero?.website}
+        showResume={!!data.resume}
         hidden={isTabsSticky}
         timezone={timezone}
       />

@@ -1,0 +1,20 @@
+label: Volunteering
+items:
+  - role: Angehöriger der Feuerwehr (AdF)
+    dates:
+      from: Jan 2025
+      to: Dec 2025
+    summary: Contributed to public safety as an active member of the local fire brigade, focusing on medical first response (Sanität) and on-call emergency readiness (Piquet).
+    accomplishments:
+      - Served in Piquet duty, ensuring rapid response availability outside regular hours and contributing to reliable emergency coverage for the municipality.
+      - Developed strong situational awareness, disciplined teamwork, and decision-making under pressure in safety-critical environments.
+    categories:
+      Skills:
+        - Crisis Response
+        - Teamwork
+        - Leadership
+        - Firefighting
+        - First Aid (Sanität)
+    company: Feuerwehr Untersiggenthal
+    logo: /images/volunteering/feuerwehr.png
+    location: Untersiggenthal, Switzerland

@@ -1,0 +1,50 @@
+label: Education
+items:
+  - role: Bachelor Degree in Computer Science
+    dates:
+      from: Sep 2018
+      to: Jul 2022
+    summary: "Bachelor's Thesis: \"Single-Player Chess as a Planning Problem\" - achieved grade 5.5, applying AI planning techniques to model and solve deterministic single-agent chess puzzles"
+    categories:
+      label: Topics Covered
+      Platform:
+        - Linux
+      Backend:
+        - Java
+        - Python
+        - C++
+      Skills:
+        - Machine Learning
+        - Algorithms & Data Structures
+    company: University of Basel
+    logo: /images/education/uni-basel.jpeg
+    location: Basel, Switzerland
+    link: https://dmi.unibas.ch/de/studium/computer-science-informatik/
+  - role: Faculty of Psychology
+    dates:
+      from: Sep 2017
+      to: Jul 2018
+    summary: Explored neuroscience with a growing interest in AI, which led to a transition into Computer Science to pursue cognitive and intelligent systems more directly.
+    categories:
+      label: Topics Covered
+      Skills:
+        - Psychology
+        - Neuroscience
+    company: University of Zurich
+    logo: /images/education/uni-zuerich.jpg
+    location: Zürich, Switzerland
+    link: https://www.psychologie.uzh.ch/de.html
+  - role: Faculty of Law
+    dates:
+      from: Sep 2016
+      to: Jul 2017
+    summary: Studied legal systems with a focus on how societal rules and norms shape behavior; this curiosity evolved into an interest in cognition and intelligent systems, leading to a shift toward Psychology and AI.
+    categories:
+      label: Topics Covered
+      Skills:
+        - Law
+        - Economics
+    company: University of Basel
+    logo: /images/education/uni-basel.jpeg
+    location: Basel, Switzerland
+    link: https://ius.unibas.ch/de/

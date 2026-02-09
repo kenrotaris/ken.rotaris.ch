@@ -1,11 +1,11 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Tab } from '@/lib/types';
-import Timeline from './timeline/Timeline';
+import { NormalizedTab } from '@/lib/data';
+import Timeline from './Timeline';
 
 interface TabsProps {
-  tabs: Tab[];
+  tabs: NormalizedTab[];
   onStickyChange: (sticky: boolean) => void;
 }
 
@@ -13,6 +13,32 @@ export default function Tabs({ tabs, onStickyChange }: TabsProps) {
   const [activeId, setActiveId] = useState<string>(tabs?.[0]?.id || '');
   const [isSticky, setIsSticky] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
+  const tabsContainerRef = useRef<HTMLDivElement>(null);
+
+  // Initialize activeId from URL hash on mount
+  useEffect(() => {
+    const hash = window.location.hash.slice(1); // Remove the '#'
+    if (hash && tabs.some(tab => tab.id === hash)) {
+      setActiveId(hash);
+      // Scroll to tabs section after a brief delay
+      setTimeout(() => {
+        tabsContainerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+  }, [tabs]);
+
+  // Listen for hash changes (e.g., browser back/forward)
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.slice(1);
+      if (hash && tabs.some(tab => tab.id === hash)) {
+        setActiveId(hash);
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, [tabs]);
 
   useEffect(() => {
     const sentinel = sentinelRef.current;
@@ -38,15 +64,22 @@ export default function Tabs({ tabs, onStickyChange }: TabsProps) {
   const activeTab = tabs.find(tab => tab.id === activeId);
   const items = activeTab?.items || [];
 
+  const handleTabClick = (tabId: string) => {
+    setActiveId(tabId);
+    // Update URL hash without triggering a scroll
+    window.history.pushState(null, '', `#${tabId}`);
+  };
+
   return (
-    <div className="relative pb-12">
+    <section className="relative pb-12" ref={tabsContainerRef} aria-label="Professional Experience">
       <div ref={sentinelRef} className="absolute top-0 left-0 right-0 h-px -translate-y-px" />
 
       {/* Tab bar - integrates visually with timeline */}
-      <div
-        className={`sticky top-0 z-[51] transition-all duration-300 w-full ${
-          isSticky ? 'bg-black/95 backdrop-blur-md py-4 shadow-lg' : 'py-3'
-        }`}
+      <nav
+        role="tablist"
+        aria-label="Experience categories"
+        className={`sticky top-0 z-[51] transition-all duration-300 w-full ${isSticky ? 'bg-black/95 backdrop-blur-md py-4 shadow-lg' : 'py-3'
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="relative">
@@ -57,11 +90,15 @@ export default function Tabs({ tabs, onStickyChange }: TabsProps) {
                   return (
                     <button
                       key={tab.id}
-                      onClick={() => setActiveId(tab.id)}
-                      className={`relative px-4 md:px-5 py-2 text-sm font-medium rounded-full flex-shrink-0 transition-all duration-200 whitespace-nowrap ${isActive
-                        ? 'text-white bg-teal-accent/20 border border-teal-accent/40'
-                        : 'text-gray-400 hover:text-gray-200 hover:bg-white/5'
+                      role="tab"
+                      aria-selected={isActive}
+                      aria-controls={`tabpanel-${tab.id}`}
+                      onClick={() => handleTabClick(tab.id)}
+                      className={`relative px-4 md:px-5 py-2 text-sm font-medium flex-shrink-0 transition-all duration-300 whitespace-nowrap ${isActive
+                        ? 'text-white scale-105'
+                        : 'text-gray-500 hover:text-gray-300'
                         }`}
+                      style={isActive ? { textShadow: '0 0 12px var(--color-accent)' } : {}}
                     >
                       {tab.label}
                     </button>
@@ -74,12 +111,17 @@ export default function Tabs({ tabs, onStickyChange }: TabsProps) {
             <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-black to-transparent md:hidden z-0" />
           </div>
         </div>
-      </div>
+      </nav>
 
       {/* Timeline - visually connected to tabs */}
-      <div className="max-w-7xl mx-auto px-6">
+      <div
+        role="tabpanel"
+        id={`tabpanel-${activeId}`}
+        aria-labelledby={`tab-${activeId}`}
+        className="max-w-7xl mx-auto px-6"
+      >
         <Timeline items={items} key={activeId} />
       </div>
-    </div>
+    </section>
   );
 }

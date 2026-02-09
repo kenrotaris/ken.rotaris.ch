@@ -2,16 +2,19 @@
 
 import { useState, useEffect } from 'react';
 import { Mail, FileText } from 'lucide-react';
-import { formatGreeting, formatDateTime } from '@/lib/utils';
+import { formatGreeting, formatDateTime, generateContactLink } from '@/lib/utils';
+
+import Link from 'next/link';
 
 interface HeaderProps {
   email?: string;
-  resumeUrl?: string;
+  website?: string;
+  showResume?: boolean;
   hidden: boolean;
   timezone?: string;
 }
 
-export default function Header({ email, resumeUrl, hidden, timezone = 'UTC' }: HeaderProps) {
+export default function Header({ email, website, showResume, hidden, timezone = 'UTC' }: HeaderProps) {
   const [greeting, setGreeting] = useState('Hello');
   const [time, setTime] = useState('');
 
@@ -43,20 +46,18 @@ export default function Header({ email, resumeUrl, hidden, timezone = 'UTC' }: H
           </div>
         </div>
         <div className="flex gap-6 md:gap-8 items-center">
-          {resumeUrl && (
-            <a
-              href={resumeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+          {showResume && (
+            <Link
+              href="/resume"
               className="group flex items-center gap-2 text-xs md:text-sm font-medium text-gray-400 hover:text-teal-accent transition-colors tracking-wide uppercase"
             >
               <FileText className="w-4 h-4" />
               <span>Resume</span>
-            </a>
+            </Link>
           )}
           {email && (
             <a
-              href={`mailto:${email}`}
+              href={generateContactLink(email, website)}
               className="group flex items-center gap-2 text-xs md:text-sm font-medium text-gray-400 hover:text-teal-accent transition-colors tracking-wide uppercase"
             >
               <Mail className="w-4 h-4" />

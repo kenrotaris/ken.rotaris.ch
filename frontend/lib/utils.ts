@@ -64,20 +64,28 @@ export function getPreviewSkills(
 /**
  * Calculate duration between two dates
  */
-export function calculateDuration(from?: string, to?: string): string {
-  if (!from) return '';
+export function calculateDuration(from?: string | number, to?: string | number): string {
+  const fromStr = String(from ?? '').trim();
+  if (!fromStr) return '';
 
-  const parseDate = (dateStr: string): Date => {
-    const parts = dateStr.trim().split(' ');
+  const parseDate = (dateStr?: string | number): Date => {
+    const str = String(dateStr ?? '').trim();
+    if (!str) return new Date();
+    const parts = str.split(' ');
     if (parts.length === 2) {
       const [month, year] = parts;
       return new Date(parseInt(year), MONTH_MAP[month] || 0, 1);
+    }
+    // Handle year-only dates (e.g., "2026")
+    if (parts.length === 1 && !isNaN(parseInt(parts[0]))) {
+      return new Date(parseInt(parts[0]), 0, 1);
     }
     return new Date();
   };
 
   const startDate = parseDate(from);
-  const endDate = to && to.toLowerCase() !== 'present' ? parseDate(to) : new Date();
+  const toStr = String(to ?? '').trim();
+  const endDate = toStr && toStr.toLowerCase() !== 'present' ? parseDate(to) : new Date();
   const months = (endDate.getFullYear() - startDate.getFullYear()) * 12 +
     (endDate.getMonth() - startDate.getMonth());
 
@@ -89,4 +97,15 @@ export function calculateDuration(from?: string, to?: string): string {
 
   if (remainingMonths === 0) return `${years} yr${years > 1 ? 's' : ''}`;
   return `${years} yr${years > 1 ? 's' : ''} ${remainingMonths} mo`;
+}
+
+/**
+ * Generate a mailto link with encoded subject and body
+ */
+export function generateContactLink(email: string, website?: string): string {
+  const websiteName = website || 'the website';
+  const subject = encodeURIComponent(`Inquiry: Contact via ${websiteName}`);
+  const body = encodeURIComponent('Hi Ken,\n\nI came across your website and would like to get in touch regarding:\n\n- [project/role/question]\n\nBest,\n[Your name]');
+
+  return `mailto:${email}?subject=${subject}&body=${body}`;
 }

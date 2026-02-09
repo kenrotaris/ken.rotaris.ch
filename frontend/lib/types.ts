@@ -1,9 +1,30 @@
-export interface Portfolio {
+export interface Portfolio<T = TimelineItem> {
   hero?: Hero;
-  tabs?: Tab[];
+  tabs?: Tab<T>[];
   footer?: Footer;
   theme?: ThemeConfig;
   metadata?: SiteMetadata;
+  resume?: ResumeSection;
+}
+
+export interface ResumeSection {
+  subtitle?: string;
+  'left-section'?: {
+    summary?: string[];
+    technicalSkills?: string[];
+    softSkills?: string[];
+    languages?: Language[];
+  };
+}
+
+export interface TechnicalSkillGroup {
+  category: string;
+  skills: string[];
+}
+
+export interface Language {
+  name: string;
+  level: string;
 }
 
 export interface SiteMetadata {
@@ -24,25 +45,34 @@ export interface Hero {
   name?: string;
   title?: string;
   bio?: string;
-  profileImage?: string;
-  faviconUrl?: string;
   resumeUrl?: string;
   email?: string;
+  website?: string;
 }
 
-export interface Tab {
+export interface Tab<T = TimelineItem> {
   id: string;
   label: string;
-  items: TimelineItem[];
+  resumeMaxItems?: number; // Optional limit for resume rendering (e.g., 3 for projects)
+  items: T[];
 }
 
 export interface TimelineItem {
-  organization: Organization;
+  // New flattened structure
+  company?: string;
+  companyDescription?: string;
+  logo?: string;
+  location?: string;
+  link?: string;
+
+  // Legacy nested structure (deprecated, for backward compatibility)
+  organization?: Organization;
+
   role: string;
-  dates: Dates;
+  dates?: Dates;
   summary: string;
   showcasedSkills?: string[];
-  accomplishments: string[];
+  accomplishments?: string[];
   categories?: {
     label?: string;
     [category: string]: string[] | string | undefined;
@@ -58,8 +88,8 @@ export interface Organization {
 }
 
 export interface Dates {
-  from?: string;
-  to?: string;
+  from?: string | number;
+  to?: string | number;
 }
 
 export interface Footer {
@@ -71,4 +101,21 @@ export interface Social {
   github?: string;
   email?: string;
   ownerName?: string;
+}
+
+/**
+ * Split YAML structure types
+ * Used when loading from multiple YAML files
+ */
+export interface SiteConfig {
+  hero?: Hero;
+  metadata?: SiteMetadata;
+  footer?: Footer;
+  theme?: ThemeConfig;
+}
+
+export interface TabFile {
+  label: string;
+  resumeMaxItems?: number;
+  items: TimelineItem[];
 }

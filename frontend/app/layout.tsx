@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
-import { fetchPortfolio } from "@/lib/api";
+import { fetchPortfolio } from "@/lib/data";
 import { DEFAULT_THEME, DEFAULT_PORTFOLIO } from "@/lib/config";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -10,11 +10,51 @@ const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 export async function generateMetadata(): Promise<Metadata> {
   const portfolio = await fetchPortfolio();
   const metadata = portfolio.metadata || DEFAULT_PORTFOLIO.metadata!;
+  const hero = portfolio.hero;
+  const website = hero?.website || 'ken.rotaris.ch';
+  const siteUrl = `https://${website}`;
 
   return {
     title: metadata.title,
     description: metadata.description,
     authors: metadata.author ? [{ name: metadata.author }] : undefined,
+    keywords: [
+      'Full Stack Developer',
+      'DevOps Engineer',
+      'Software Engineer',
+      'Java Developer',
+      'Kubernetes',
+      'Docker',
+      'CI/CD',
+      'Backend Development',
+      'Frontend Development',
+    ],
+    openGraph: {
+      type: 'website',
+      locale: 'en_US',
+      url: siteUrl,
+      title: metadata.title,
+      description: metadata.description,
+      siteName: metadata.title,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: metadata.title,
+      description: metadata.description,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+    alternates: {
+      canonical: siteUrl,
+    },
   };
 }
 
@@ -28,6 +68,11 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        {/* Preconnect for performance */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+      </head>
       <body
         className={`${inter.variable} ${outfit.variable} font-sans antialiased`}
         style={{
