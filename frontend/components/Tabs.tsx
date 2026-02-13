@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { NormalizedTab } from '@/lib/data';
+import { useHashNavigation } from '@/hooks/useHashNavigation';
 import Timeline from './Timeline';
 
 interface TabsProps {
@@ -10,35 +11,20 @@ interface TabsProps {
 }
 
 export default function Tabs({ tabs, onStickyChange }: TabsProps) {
-  const [activeId, setActiveId] = useState<string>(tabs?.[0]?.id || '');
+  const tabIds = tabs.map(tab => tab.id);
+  const [activeId, setActiveId] = useHashNavigation(tabIds, tabs?.[0]?.id);
   const [isSticky, setIsSticky] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const tabsContainerRef = useRef<HTMLDivElement>(null);
 
-  // Initialize activeId from URL hash on mount
+  // Scroll to tabs section when hash changes
   useEffect(() => {
-    const hash = window.location.hash.slice(1); // Remove the '#'
-    if (hash && tabs.some(tab => tab.id === hash)) {
-      setActiveId(hash);
-      // Scroll to tabs section after a brief delay
+    if (window.location.hash) {
       setTimeout(() => {
         tabsContainerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 100);
     }
-  }, [tabs]);
-
-  // Listen for hash changes (e.g., browser back/forward)
-  useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.slice(1);
-      if (hash && tabs.some(tab => tab.id === hash)) {
-        setActiveId(hash);
-      }
-    };
-
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, [tabs]);
+  }, [activeId]);
 
   useEffect(() => {
     const sentinel = sentinelRef.current;

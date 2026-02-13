@@ -113,11 +113,11 @@ function TimelineItem({ item, index, expanded, onToggle }: TimelineItemProps) {
       </div>
 
       <Wrapper {...wrapperProps}>
-        <div className={`flex flex-col md:flex-row py-4 md:py-6 transition-all rounded-lg pl-14 md:pl-0 pr-4 md:pr-0 ${expanded && !isSimpleItem
-          ? 'glass-strong'
+        <div className={`flex flex-col md:flex-row py-4 md:py-6 transition-all pl-14 md:pl-0 pr-4 md:pr-0 ${expanded && !isSimpleItem
+          ? 'glass-strong rounded-t-lg'
           : isSimpleItem
-            ? 'glass'
-            : 'glass glass-hover'
+            ? 'glass rounded-lg'
+            : 'glass glass-hover rounded-lg'
           }`}>
           {/* Date column (desktop only) */}
           <div className="hidden md:flex flex-col gap-1 items-start w-48 shrink-0 text-left pl-4 pr-4">
@@ -201,7 +201,7 @@ function TimelineItem({ item, index, expanded, onToggle }: TimelineItemProps) {
               transition={{ duration: 0.2 }}
               className="overflow-hidden"
             >
-              <div className="glass-strong rounded-b-lg ml-14 md:ml-0">
+              <div className="glass-strong rounded-b-lg ml-14 md:ml-0 -mt-2">
                 <div className="md:ml-48">
                   <TimelineDetails
                     accomplishments={item.accomplishments}
@@ -240,7 +240,7 @@ export default function Timeline({ items }: TimelineProps) {
         />
 
         {/* Timeline items */}
-        <div className="space-y-0">
+        <div className="space-y-3">
           {items.map((item, index) => (
             <TimelineItem
               key={`${item.company}-${item.role}`}

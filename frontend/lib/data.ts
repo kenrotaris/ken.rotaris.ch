@@ -9,7 +9,7 @@ import path from 'path';
 import yaml from 'js-yaml';
 import { Portfolio, TimelineItem, Tab, TabFile } from './types';
 import { DEFAULT_PORTFOLIO } from './config';
-import { validatePortfolio, normalizeDates } from './schema';
+import { validatePortfolio } from './schema';
 
 const DATA_DIR = path.join(process.cwd(), 'public', 'data');
 
@@ -32,18 +32,19 @@ export type NormalizedPortfolio = Portfolio<NormalizedTimelineItem>;
 // ============================================================================
 
 /**
- * Normalize timeline item to use flattened structure
- * Supports both old (organization.*) and new (company, logo, etc.) formats
+ * Normalize timeline item structure and dates
+ * - Flattens old organization.* format to new company, logo, etc.
+ * - Converts numeric dates to strings
  */
 function normalizeTimelineItem(item: TimelineItem): NormalizedTimelineItem {
-  // If already using new format, return as-is
-  if (item.company) {
-    return item as NormalizedTimelineItem;
-  }
+  let normalized: NormalizedTimelineItem;
 
-  // Otherwise, migrate from old organization format
-  if (item.organization) {
-    return {
+  // Normalize structure
+  if (item.company) {
+    normalized = item as NormalizedTimelineItem;
+  } else if (item.organization) {
+    // Migrate from old organization format
+    normalized = {
       ...item,
       company: item.organization.name,
       companyDescription: item.organization.description,
@@ -51,15 +52,25 @@ function normalizeTimelineItem(item: TimelineItem): NormalizedTimelineItem {
       location: item.organization.location,
       link: item.organization.link,
     } as NormalizedTimelineItem;
+  } else {
+    // Fallback (shouldn't happen with validation)
+    normalized = {
+      ...item,
+      company: 'Unknown',
+      logo: '/images/placeholder.png',
+      location: 'Unknown',
+    } as NormalizedTimelineItem;
   }
 
-  // Fallback (shouldn't happen with validation)
-  return {
-    ...item,
-    company: 'Unknown',
-    logo: '/images/placeholder.png',
-    location: 'Unknown',
-  } as NormalizedTimelineItem;
+  // Normalize dates (convert numbers to strings)
+  if (normalized.dates) {
+    normalized.dates = {
+      from: normalized.dates.from != null ? String(normalized.dates.from) : undefined,
+      to: normalized.dates.to != null ? String(normalized.dates.to) : undefined,
+    };
+  }
+
+  return normalized;
 }
 
 /**
@@ -97,21 +108,11 @@ async function loadSplitYaml(
     const tabPath = path.join(tabsDir, filename);
     const tabData = yaml.load(await fs.promises.readFile(tabPath, 'utf8')) as TabFile;
 
-    // Normalize the tab items
-    const normalizedItems = normalizePortfolioData([
-      {
-        id: tabId,
-        label: tabData.label,
-        resumeMaxItems: tabData.resumeMaxItems,
-        items: tabData.items,
-      },
-    ]);
-
     tabs.push({
       id: tabId,
       label: tabData.label,
       resumeMaxItems: tabData.resumeMaxItems,
-      items: normalizedItems[0].items,
+      items: (tabData.items || []).map(normalizeTimelineItem),
     });
   }
 
@@ -152,21 +153,18 @@ async function loadMonolithicYaml(): Promise<NormalizedPortfolio> {
     validatedData = rawData as Portfolio;
   }
 
-  // Normalize types (e.g., convert number dates to strings)
-  const normalizedData = normalizeDates(validatedData);
-
-  // Normalize structure (flatten organization fields)
-  const tabs: NormalizedTab[] = normalizedData.tabs
-    ? normalizePortfolioData(normalizedData.tabs)
+  // Normalize structure and dates
+  const tabs: NormalizedTab[] = validatedData.tabs
+    ? normalizePortfolioData(validatedData.tabs)
     : [];
 
   // Return data with defaults for missing fields
   return {
-    hero: normalizedData.hero || DEFAULT_PORTFOLIO.hero,
+    hero: validatedData.hero || DEFAULT_PORTFOLIO.hero,
     tabs,
-    footer: normalizedData.footer,
-    theme: normalizedData.theme || DEFAULT_PORTFOLIO.theme,
-    resume: normalizedData.resume,
+    footer: validatedData.footer,
+    theme: validatedData.theme || DEFAULT_PORTFOLIO.theme,
+    resume: validatedData.resume,
   };
 }
 

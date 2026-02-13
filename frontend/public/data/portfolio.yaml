@@ -1,12 +1,12 @@
 hero:
   name: KEN ROTARIS
   title: Full Stack Developer & DevOps Engineer
-  bio: Hello, I'm Ken, a Swiss systems-focused software engineer with 7+ years of experience in backend development, web technologies, and DevOps. I work on Java-based systems and modern infrastructure, with a strong focus on automation and maintainable code. I care deeply about structure and clarity, designing systems so intent is clear at the top and complexity is revealed gradually.
+  bio: Systems-focused engineer with 7+ years in software development, specializing in Java backend and modern infrastructure. I build production systems grounded in clarity, reliability, and automation.
   email: ken@rotaris.ch
   website: ken.rotaris.ch
 metadata:
   title: Ken Rotaris - Full-Stack Developer & DevOps Engineer
-  description: Swiss systems-focused software engineer with 7+ years of experience in backend development, web technologies, and DevOps
+  description: Systems-focused engineer with 7+ years in software development, specializing in Java backend and modern infrastructure. I build production systems grounded in clarity, reliability, and automation.
   author: Ken Rotaris
 footer:
   social:

@@ -6,7 +6,7 @@ import Header from '@/components/Header';
 import About from '@/components/About';
 import Tabs from '@/components/Tabs';
 import Footer from '@/components/Footer';
-import Background from '@/components/Background';
+import Background from '@/components/background/Background';
 import { NormalizedPortfolio } from '@/lib/data';
 
 interface HomeClientProps {
@@ -22,21 +22,23 @@ export default function HomeClient({ data }: HomeClientProps) {
   const timezone = data.theme?.timezone || DEFAULT_THEME.timezone || 'UTC';
 
   return (
-    <main className="relative">
+    <>
       <Background accentColor={backgroundColor} />
-      <Header
-        email={data.footer?.social?.email || data.hero?.email}
-        website={data.hero?.website}
-        showResume={!!data.resume}
-        hidden={isTabsSticky}
-        timezone={timezone}
-      />
-      <About data={data.hero} />
-      <Tabs
-        tabs={data.tabs || []}
-        onStickyChange={setIsTabsSticky}
-      />
-      <Footer social={data.footer?.social} />
-    </main>
+      <main className="relative z-0">
+        <Header
+          email={data.footer?.social?.email || data.hero?.email}
+          website={data.hero?.website}
+          showResume={!!data.resume}
+          hidden={isTabsSticky}
+          timezone={timezone}
+        />
+        <About data={data.hero} />
+        <Tabs
+          tabs={data.tabs || []}
+          onStickyChange={setIsTabsSticky}
+        />
+        <Footer social={data.footer?.social} />
+      </main>
+    </>
   );
 }

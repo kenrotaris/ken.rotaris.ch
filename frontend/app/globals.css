@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-black text-gray-100 antialiased min-h-screen;
+    @apply text-gray-100 antialiased min-h-screen;
     /* overflow-x-hidden; Removed to fix sticky positioning */
   }
 

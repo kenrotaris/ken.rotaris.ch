@@ -3,6 +3,7 @@ import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import { fetchPortfolio } from "@/lib/data";
 import { DEFAULT_THEME, DEFAULT_PORTFOLIO } from "@/lib/config";
+import { getWebsiteUrl } from "@/lib/utils";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
@@ -11,8 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const portfolio = await fetchPortfolio();
   const metadata = portfolio.metadata || DEFAULT_PORTFOLIO.metadata!;
   const hero = portfolio.hero;
-  const website = hero?.website || 'ken.rotaris.ch';
-  const siteUrl = `https://${website}`;
+  const siteUrl = getWebsiteUrl(hero?.website, hero?.email);
 
   return {
     title: metadata.title,
@@ -67,7 +67,7 @@ export default async function RootLayout({
   const accentColor = portfolio.theme?.colors?.accent || DEFAULT_THEME.colors.accent;
 
   return (
-    <html lang="en">
+    <html lang="en" style={{ backgroundColor: '#000000' }}>
       <head>
         {/* Preconnect for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -81,6 +81,16 @@ export default async function RootLayout({
           "--color-accent-30": `color-mix(in srgb, ${accentColor} 30%, transparent)`,
         } as React.CSSProperties}
       >
+        {/* Black background at lowest z-index - fog renders on top of this */}
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: -100,
+            pointerEvents: 'none',
+            backgroundColor: '#000000'
+          }}
+        />
         {children}
       </body>
     </html>

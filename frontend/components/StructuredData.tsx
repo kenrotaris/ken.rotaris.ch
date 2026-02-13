@@ -1,86 +1,78 @@
 import { Portfolio } from '@/lib/types';
+import { getWebsiteUrl } from '@/lib/utils';
 
 interface StructuredDataProps {
   portfolio: Portfolio;
 }
 
+// Helper to render a JSON-LD schema script tag
+const Schema = ({ data }: { data: object }) => (
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+  />
+);
+
 /**
  * JSON-LD Structured Data for SEO and AI comprehension
- * Implements Schema.org Person and WebSite schemas
+ * Implements Schema.org Person, WebSite, and ProfilePage schemas
  */
 export default function StructuredData({ portfolio }: StructuredDataProps) {
   const { hero, metadata, footer } = portfolio;
-  const website = hero?.website || 'ken.rotaris.ch';
-  const siteUrl = `https://${website}`;
+  const siteUrl = getWebsiteUrl(hero?.website, hero?.email || footer?.social?.email);
 
-  // Person schema - defines who you are
-  const personSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Person',
-    '@id': `${siteUrl}/#person`,
-    name: hero?.name || metadata?.author || 'Ken Rotaris',
-    jobTitle: hero?.title || 'Full Stack Developer & DevOps Engineer',
-    description: hero?.bio,
-    email: hero?.email || footer?.social?.email,
-    url: siteUrl,
-    sameAs: [
-      footer?.social?.linkedin,
-      footer?.social?.github,
-    ].filter(Boolean),
-    knowsAbout: [
-      'Software Development',
-      'DevOps',
-      'Backend Development',
-      'Frontend Development',
-      'Kubernetes',
-      'Docker',
-      'Java',
-      'Spring Framework',
-      'CI/CD',
-      'Cloud Infrastructure',
-    ],
-  };
-
-  // Website schema - defines what your site is
-  const websiteSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    '@id': `${siteUrl}/#website`,
-    url: siteUrl,
-    name: metadata?.title || 'Ken Rotaris Portfolio',
-    description: metadata?.description,
-    author: {
+  const schemas = [
+    // Person schema
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Person',
       '@id': `${siteUrl}/#person`,
+      name: hero?.name || metadata?.author || 'Ken Rotaris',
+      jobTitle: hero?.title || 'Full Stack Developer & DevOps Engineer',
+      description: hero?.bio,
+      email: hero?.email || footer?.social?.email,
+      url: siteUrl,
+      sameAs: [footer?.social?.linkedin, footer?.social?.github].filter(Boolean),
+      knowsAbout: [
+        'Software Development',
+        'DevOps',
+        'Backend Development',
+        'Frontend Development',
+        'Kubernetes',
+        'Docker',
+        'Java',
+        'Spring Framework',
+        'CI/CD',
+        'Cloud Infrastructure',
+      ],
     },
-  };
-
-  // ProfilePage schema - specialized for portfolio/resume sites
-  const profilePageSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'ProfilePage',
-    '@id': `${siteUrl}/#profilepage`,
-    mainEntity: {
-      '@id': `${siteUrl}/#person`,
+    // WebSite schema
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      url: siteUrl,
+      name: metadata?.title || 'Ken Rotaris Portfolio',
+      description: metadata?.description,
+      author: { '@id': `${siteUrl}/#person` },
     },
-    url: siteUrl,
-    name: metadata?.title,
-    description: metadata?.description,
-  };
+    // ProfilePage schema
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ProfilePage',
+      '@id': `${siteUrl}/#profilepage`,
+      mainEntity: { '@id': `${siteUrl}/#person` },
+      url: siteUrl,
+      name: metadata?.title,
+      description: metadata?.description,
+    },
+  ];
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(profilePageSchema) }}
-      />
+      {schemas.map((schema, i) => (
+        <Schema key={i} data={schema} />
+      ))}
     </>
   );
 }

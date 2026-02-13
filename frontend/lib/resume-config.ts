@@ -31,15 +31,11 @@ export const RESUME_CONFIG = {
     white: '#FFFFFF',
     black: '#000000',
     gray: {
-      50: '#F9FAFB',
-      100: '#F3F4F6',
-      200: '#E5E7EB',
-      300: '#D1D5DB',
-      500: '#6B7280',
-      600: '#4B5563',
-      700: '#374151',
-      800: '#1F2937',
-      900: '#111827',
+      300: '#D1D5DB',  // Borders
+      500: '#6B7280',  // Dates, secondary text
+      600: '#4B5563',  // Tertiary text
+      700: '#374151',  // Body text
+      900: '#111827',  // Headings, emphasis
     },
   },
 
@@ -53,13 +49,12 @@ export const RESUME_CONFIG = {
       small: 8, // Dates, locations, tech stacks
     },
     spacing: {
-      xs: 2,
-      sm: 4,
-      md: 8,
-      lg: 12,
-      xl: 16,
-      xxl: 20,
-      xxxl: 24,
+      xs: 2,   // Minimal gaps
+      sm: 4,   // Small gaps
+      md: 8,   // Medium gaps
+      lg: 12,  // Section spacing
+      xl: 16,  // Header padding
+      xxxl: 24, // Page padding
     },
   },
 } as const;

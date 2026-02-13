@@ -1,9 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { Mail, FileText } from 'lucide-react';
-import { formatGreeting, formatDateTime, generateContactLink } from '@/lib/utils';
-
+import { generateContactLink } from '@/lib/utils';
+import { useCurrentTime } from '@/hooks/useCurrentTime';
 import Link from 'next/link';
 
 interface HeaderProps {
@@ -15,21 +14,7 @@ interface HeaderProps {
 }
 
 export default function Header({ email, website, showResume, hidden, timezone = 'UTC' }: HeaderProps) {
-  const [greeting, setGreeting] = useState('Hello');
-  const [time, setTime] = useState('');
-
-  // Update time every second
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      setGreeting(formatGreeting(now));
-      setTime(formatDateTime(now, timezone));
-    };
-
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, [timezone]);
+  const { greeting, time } = useCurrentTime(timezone);
 
   return (
     <header

@@ -1,6 +1,27 @@
 label: Projects
 resumeMaxItems: 3
 items:
+  - role: ATS-Optimized Portfolio & Resume Generator
+    dates:
+      from: Feb 2026
+    summary: Extended existing portfolio website with YAML-driven templating and auto-generated ATS-friendly resumes
+    accomplishments:
+      - Built a template-driven portfolio system enabling non-technical users to create personalized websites by editing configuration files.
+      - Developed automated resume PDF generation optimized for Applicant Tracking Systems (ATS), maximizing recruiter visibility.
+    categories:
+      Skills:
+        - ATS Optimization
+        - Data-Driven Design
+        - PDF Generation
+        - YAML Processing
+        - Next.js
+        - React
+        - TypeScript
+        - Tailwind CSS
+    company: Open-Source Portfolio Framework
+    logo: /images/projects/resume-creator.png
+    location: Freetime
+    link: https://github.com/kenrotaris/ken.rotaris.ch
   - role: GitOps-Managed Cloud Infrastructure
     dates:
       from: "2026"

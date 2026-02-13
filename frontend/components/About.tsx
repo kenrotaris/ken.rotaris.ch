@@ -37,6 +37,7 @@ export default function About({ data }: AboutProps) {
               src="/images/profile.png"
               alt={data.name || 'Profile'}
               fill
+              sizes="(max-width: 768px) 128px, 160px"
               className="object-cover"
               priority
             />

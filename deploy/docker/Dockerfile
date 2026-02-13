@@ -3,10 +3,14 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
+ENV NODE_ENV=production
 RUN npm run build
+
+#TODO: use non root user
 
 FROM node:20-alpine
 WORKDIR /app
+ENV NODE_ENV=production
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/public ./public

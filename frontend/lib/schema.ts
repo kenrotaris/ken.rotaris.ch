@@ -13,42 +13,47 @@ export class ValidationError extends Error {
   }
 }
 
-export function validatePortfolio(data: any): Portfolio {
+export function validatePortfolio(data: unknown): Portfolio {
   const errors: string[] = [];
+  const portfolio = data as Record<string, unknown>;
 
   // Validate hero section
-  if (data.hero) {
-    if (!data.hero.name) errors.push('hero.name is required');
-    if (!data.hero.title) errors.push('hero.title is required');
+  if (portfolio.hero) {
+    const hero = portfolio.hero as Record<string, unknown>;
+    if (!hero.name) errors.push('hero.name is required');
+    if (!hero.title) errors.push('hero.title is required');
   }
 
   // Validate tabs
-  if (data.tabs) {
-    data.tabs.forEach((tab: any, i: number) => {
-      if (!tab.id) errors.push(`tabs[${i}].id is required`);
-      if (!tab.label) errors.push(`tabs[${i}].label is required`);
+  if (portfolio.tabs && Array.isArray(portfolio.tabs)) {
+    portfolio.tabs.forEach((tab, i: number) => {
+      const tabData = tab as Record<string, unknown>;
+      if (!tabData.id) errors.push(`tabs[${i}].id is required`);
+      if (!tabData.label) errors.push(`tabs[${i}].label is required`);
 
-      if (tab.items) {
-        tab.items.forEach((item: any, j: number) => {
+      if (tabData.items && Array.isArray(tabData.items)) {
+        tabData.items.forEach((item, j: number) => {
+          const itemData = item as Record<string, unknown>;
           const path = `tabs[${i}].items[${j}]`;
 
           // Check for common typos
-          if (item.form || item.too) {
+          if ((itemData as {form?: unknown}).form || (itemData as {too?: unknown}).too) {
             errors.push(`${path}: Did you mean "from"/"to" instead of "form"/"too"?`);
           }
 
           // Validate required fields (support both old and new structure)
-          if (!item.company && !item.organization?.name) {
+          const company = (itemData as {company?: unknown}).company;
+          const organization = (itemData as {organization?: {name?: unknown}}).organization;
+          if (!company && !organization?.name) {
             errors.push(`${path}.company (or organization.name) is required`);
           }
-          if (!item.role) errors.push(`${path}.role is required`);
-          if (!item.summary) errors.push(`${path}.summary is required`);
+          if (!(itemData as {role?: unknown}).role) errors.push(`${path}.role is required`);
+          if (!(itemData as {summary?: unknown}).summary) errors.push(`${path}.summary is required`);
 
           // Validate dates if present
-          if (item.dates) {
-            if (item.dates.from && typeof item.dates.from === 'number') {
-              console.warn(`${path}.dates.from is a number (${item.dates.from}). Consider quoting it: "${item.dates.from}"`);
-            }
+          const dates = (itemData as {dates?: {from?: unknown; to?: unknown}}).dates;
+          if (dates?.from && typeof dates.from === 'number') {
+            console.warn(`${path}.dates.from is a number (${dates.from}). Consider quoting it: "${dates.from}"`);
           }
         });
       }
@@ -61,7 +66,7 @@ export function validatePortfolio(data: any): Portfolio {
     );
   }
 
-  return data as Portfolio;
+  return portfolio as Portfolio;
 }
 
 /**

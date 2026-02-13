@@ -1,18 +1,12 @@
-import React from 'react';
-import { Page, Text, View, Document, StyleSheet, Font } from '@react-pdf/renderer';
+import React, { type ReactElement } from 'react';
+import { Page, Text, View, Document, StyleSheet, Font, type DocumentProps } from '@react-pdf/renderer';
 import { Portfolio } from '@/lib/types';
 import { RESUME_CONFIG } from '@/lib/resume-config';
+import { getWebsiteUrl } from '@/lib/utils';
 
 // Register fonts for embedding (ensures ATS compatibility)
-// Using Helvetica with proper embedding flags
-Font.register({
-    family: 'Helvetica',
-    fonts: [
-        { src: 'Helvetica' }, // Regular
-        { src: 'Helvetica-Bold', fontWeight: 700 }, // Bold
-        { src: 'Helvetica-Oblique', fontStyle: 'italic' }, // Italic
-    ],
-});
+// Note: Helvetica is a standard font in PDF and doesn't need explicit registration
+// unless using a custom version. @react-pdf/renderer handles it automatically.
 
 // Create styles using configuration - ATS-friendly single column layout
 const createStyles = (accentColor: string) => StyleSheet.create({
@@ -185,6 +179,9 @@ interface ResumePDFProps {
     portfolio: Portfolio;
 }
 
+// Extract type from createStyles for type-safe component props
+type ResumeStyles = ReturnType<typeof createStyles>;
+
 // Generate filename: ken_rotaris__resume__9.2.2026.pdf
 export function generateResumeFilename(heroName: string): string {
     const now = new Date();
@@ -192,18 +189,8 @@ export function generateResumeFilename(heroName: string): string {
     return `${sanitizedName}__resume__${now.getDate()}.${now.getMonth() + 1}.${now.getFullYear()}.pdf`;
 }
 
-// Get website URL from hero config or fallback
-function getWebsiteUrl(website?: string, email?: string): string {
-    if (website) return website.startsWith('http') ? website : `https://${website}`;
-    if (email) {
-        const domain = email.split('@')[1];
-        return `https://${domain}`;
-    }
-    return 'https://www.example.com';
-}
-
 // Render bullet list
-const BulletList: React.FC<{ items: string[]; styles: any }> = ({ items, styles }) => (
+const BulletList: React.FC<{ items: string[]; styles: ResumeStyles }> = ({ items, styles }) => (
     <>
         {items.map((item, i) => (
             <View key={i} style={styles.bulletPoint}>
@@ -214,9 +201,12 @@ const BulletList: React.FC<{ items: string[]; styles: any }> = ({ items, styles 
     </>
 );
 
-export default function ResumePDF({ portfolio }: ResumePDFProps) {
+// Factory function that returns a Document element directly (for pdf() compatibility)
+export function createResumeDocument(portfolio: Portfolio): ReactElement<DocumentProps> {
     const { hero, tabs, resume, footer, theme } = portfolio;
-    if (!hero || !tabs) return null;
+    if (!hero || !tabs) {
+        throw new Error('Missing required hero or tabs data for resume PDF generation');
+    }
 
     // Use theme accent color or fallback
     const accentColor = theme?.colors?.accent || RESUME_CONFIG.colors.gray[900];
@@ -455,4 +445,9 @@ export default function ResumePDF({ portfolio }: ResumePDFProps) {
             </Page>
         </Document>
     );
+}
+
+// Optional: Component wrapper for other usage contexts
+export default function ResumePDF({ portfolio }: ResumePDFProps) {
+    return createResumeDocument(portfolio);
 }
