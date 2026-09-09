@@ -1,13 +1,18 @@
 'use client';
 
 import { Social } from '@/lib/types';
+import { visualEdit, SETTINGS_COLLECTION } from '@/lib/visual-editing';
 import { Github, Linkedin, Mail } from 'lucide-react';
 
 interface FooterProps {
   social?: Social;
+  /** Directus settings row id; enables click-to-edit when present. */
+  settingsId?: string;
 }
 
-export default function Footer({ social }: FooterProps) {
+export default function Footer({ social, settingsId }: FooterProps) {
+  const edit = visualEdit(settingsId ? { collection: SETTINGS_COLLECTION, item: settingsId } : null);
+
   if (!social || (!social.linkedin && !social.github && !social.email)) {
     return null;
   }
@@ -15,13 +20,19 @@ export default function Footer({ social }: FooterProps) {
   return (
     <footer className="py-12 px-6 border-t border-white/5 glass-dark mt-20">
       <div className="max-w-6xl mx-auto flex flex-col items-center">
-        <nav className="flex gap-8 mb-8">
+        <nav
+          className="flex gap-8 mb-8"
+          data-directus={edit.fields(
+            ['social_linkedin', 'social_github', 'social_email'],
+            'drawer'
+          )}
+        >
           {social.linkedin && (
             <a
               href={social.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-teal-accent transition-all duration-300"
+              className="p-3 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-accent-text transition-all duration-300"
               aria-label="LinkedIn"
             >
               <Linkedin className="w-5 h-5" />
@@ -32,7 +43,7 @@ export default function Footer({ social }: FooterProps) {
               href={social.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-teal-accent transition-all duration-300"
+              className="p-3 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-accent-text transition-all duration-300"
               aria-label="GitHub"
             >
               <Github className="w-5 h-5" />
@@ -41,14 +52,17 @@ export default function Footer({ social }: FooterProps) {
           {social.email && (
             <a
               href={`mailto:${social.email}`}
-              className="p-3 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-teal-accent transition-all duration-300"
+              className="p-3 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-accent-text transition-all duration-300"
               aria-label="Email"
             >
               <Mail className="w-5 h-5" />
             </a>
           )}
         </nav>
-        <p className="text-gray-600 text-xs tracking-widest uppercase">
+        <p
+          className="text-gray-400 text-xs tracking-widest uppercase"
+          data-directus={edit.field('social_owner_name')}
+        >
           © {new Date().getFullYear()} {social.ownerName || 'Portfolio'}
         </p>
       </div>

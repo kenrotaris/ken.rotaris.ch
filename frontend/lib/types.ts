@@ -1,4 +1,6 @@
 export interface Portfolio<T = TimelineItem> {
+  /** Directus row id of the settings singleton; absent when loaded from YAML. */
+  directusId?: string;
   hero?: Hero;
   tabs?: Tab<T>[];
   footer?: Footer;
@@ -52,12 +54,17 @@ export interface Hero {
 
 export interface Tab<T = TimelineItem> {
   id: string;
+  /** Directus row id; absent when loaded from YAML. */
+  directusId?: string;
   label: string;
   resumeMaxItems?: number; // Optional limit for resume rendering (e.g., 3 for projects)
   items: T[];
 }
 
 export interface TimelineItem {
+  /** Directus row id; absent when loaded from YAML. */
+  directusId?: string;
+
   // New flattened structure
   company?: string;
   companyDescription?: string;

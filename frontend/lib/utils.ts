@@ -100,6 +100,9 @@ export function calculateDuration(from?: string | number, to?: string | number):
   const months = (endDate.getFullYear() - startDate.getFullYear()) * 12 +
     (endDate.getMonth() - startDate.getMonth());
 
+  // A start date in the future means the item hasn't happened yet
+  // (e.g. a certification scheduled for a later exam window).
+  if (startDate.getTime() > Date.now()) return 'PLANNED';
   if (months < 1) return '< 1 mo';
   if (months < 12) return pluralize(months, 'mo');
 

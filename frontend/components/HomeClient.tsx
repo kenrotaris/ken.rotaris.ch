@@ -7,13 +7,16 @@ import About from '@/components/About';
 import Tabs from '@/components/Tabs';
 import Footer from '@/components/Footer';
 import Background from '@/components/background/Background';
+import VisualEditing from '@/components/VisualEditing';
 import { NormalizedPortfolio } from '@/lib/data';
 
 interface HomeClientProps {
   data: NormalizedPortfolio;
+  /** Directus base URL, passed from the server so no NEXT_PUBLIC_ var is needed. */
+  directusUrl?: string;
 }
 
-export default function HomeClient({ data }: HomeClientProps) {
+export default function HomeClient({ data, directusUrl }: HomeClientProps) {
   const [isTabsSticky, setIsTabsSticky] = useState(false);
 
   const accentColor = data.theme?.colors?.accent || DEFAULT_THEME.colors.accent;
@@ -23,6 +26,7 @@ export default function HomeClient({ data }: HomeClientProps) {
 
   return (
     <>
+      <VisualEditing directusUrl={directusUrl} />
       <Background accentColor={backgroundColor} />
       <main className="relative z-0">
         <Header
@@ -32,12 +36,12 @@ export default function HomeClient({ data }: HomeClientProps) {
           hidden={isTabsSticky}
           timezone={timezone}
         />
-        <About data={data.hero} />
+        <About data={data.hero} settingsId={data.directusId} />
         <Tabs
           tabs={data.tabs || []}
           onStickyChange={setIsTabsSticky}
         />
-        <Footer social={data.footer?.social} />
+        <Footer social={data.footer?.social} settingsId={data.directusId} />
       </main>
     </>
   );

@@ -12,6 +12,8 @@ module.exports = {
       },
       colors: {
         'teal-accent': 'var(--color-accent)',
+        // WCAG-AA-safe tint of the accent, for text only.
+        'accent-text': 'var(--color-accent-text, var(--color-accent))',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-out forwards',

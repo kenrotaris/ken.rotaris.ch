@@ -68,17 +68,14 @@ export default async function RootLayout({
 
   return (
     <html lang="en" style={{ backgroundColor: '#000000' }}>
-      <head>
-        {/* Preconnect for performance */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-      </head>
       <body
         className={`${inter.variable} ${outfit.variable} font-sans antialiased`}
         style={{
           "--color-accent": accentColor,
           "--color-accent-20": `color-mix(in srgb, ${accentColor} 20%, transparent)`,
           "--color-accent-30": `color-mix(in srgb, ${accentColor} 30%, transparent)`,
+          // Text-safe tint of the accent: the raw value fails WCAG AA on black.
+          "--color-accent-text": `color-mix(in srgb, ${accentColor} 62%, white)`,
         } as React.CSSProperties}
       >
         {/* Black background at lowest z-index - fog renders on top of this */}

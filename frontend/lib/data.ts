@@ -10,6 +10,7 @@ import yaml from 'js-yaml';
 import { Portfolio, TimelineItem, Tab, TabFile } from './types';
 import { DEFAULT_PORTFOLIO } from './config';
 import { validatePortfolio } from './schema';
+import { fetchPortfolioFromDirectus, isDirectusConfigured } from './directus';
 
 const DATA_DIR = path.join(process.cwd(), 'public', 'data');
 
@@ -177,6 +178,24 @@ async function loadMonolithicYaml(): Promise<NormalizedPortfolio> {
  * Structure: portfolio.yaml (config) + tabs/*.yaml (tab data)
  */
 export async function fetchPortfolio(): Promise<NormalizedPortfolio> {
+  // Directus is the source of truth when configured; the YAML in this repo is
+  // the fallback, so the site keeps rendering if Directus is down or empty.
+  if (isDirectusConfigured()) {
+    const remote = await fetchPortfolioFromDirectus();
+    if (remote?.tabs?.length) {
+      return {
+        directusId: remote.directusId,
+        hero: remote.hero,
+        metadata: remote.metadata,
+        footer: remote.footer,
+        theme: remote.theme,
+        resume: remote.resume,
+        tabs: normalizePortfolioData(remote.tabs),
+      };
+    }
+    console.warn('[data] Directus returned no tabs — using YAML');
+  }
+
   try {
     const portfolioPath = path.join(DATA_DIR, 'portfolio.yaml');
     const tabsDir = path.join(DATA_DIR, 'tabs');

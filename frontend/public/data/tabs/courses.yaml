@@ -1,5 +1,22 @@
 label: Courses & Certifications
 items:
+  - role: Amazon Web Services
+    summary: Planned certification covering the design of resilient, high-performing, secure, and cost-optimized architectures on AWS, including compute, storage, networking, and identity services.
+    dates:
+      from: Nov 2026
+    categories:
+      label: Topics Covered
+      DevOps:
+        - AWS
+        - Cloud Architecture
+      Skills:
+        - High Availability
+        - Cost Optimization
+        - Security
+    company: AWS Certified Solutions Architect – Associate
+    logo: /images/education/aws.svg
+    location: Online
+    link: https://aws.amazon.com/de/certification/certified-solutions-architect-associate/
   - role: SCRUMstudy
     summary: Covered core Scrum principles, roles, events, and artifacts, with a focus on iterative delivery, team collaboration, and applying Scrum effectively in real-world software projects.
     categories:

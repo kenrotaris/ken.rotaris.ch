@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { NormalizedTab } from '@/lib/data';
 import { useHashNavigation } from '@/hooks/useHashNavigation';
 import Timeline from './Timeline';
+import { visualEdit, TABS_COLLECTION } from '@/lib/visual-editing';
 
 interface TabsProps {
   tabs: NormalizedTab[];
@@ -76,13 +77,19 @@ export default function Tabs({ tabs, onStickyChange }: TabsProps) {
                   return (
                     <button
                       key={tab.id}
+                      id={`tab-${tab.id}`}
                       role="tab"
                       aria-selected={isActive}
                       aria-controls={`tabpanel-${tab.id}`}
                       onClick={() => handleTabClick(tab.id)}
+                      data-directus={visualEdit(
+                        tab.directusId
+                          ? { collection: TABS_COLLECTION, item: tab.directusId }
+                          : null
+                      ).field('label')}
                       className={`relative px-4 md:px-5 py-2 text-sm font-medium flex-shrink-0 transition-all duration-300 whitespace-nowrap ${isActive
                         ? 'text-white scale-105'
-                        : 'text-gray-500 hover:text-gray-300'
+                        : 'text-gray-400 hover:text-gray-200'
                         }`}
                       style={isActive ? { textShadow: '0 0 12px var(--color-accent)' } : {}}
                     >

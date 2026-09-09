@@ -1,11 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { TimelineItem as TimelineItemType } from '@/lib/types';
 import { NormalizedTimelineItem } from '@/lib/data';
 import { calculateDuration, getPreviewSkills } from '@/lib/utils';
+import { visualEdit, ITEMS_COLLECTION } from '@/lib/visual-editing';
 
 // Timeline positioning constants
 const TIMELINE_LINE_LEFT_MOBILE = 'left-6';
@@ -52,7 +52,7 @@ function TimelineDetails({ accomplishments, categories: categoriesData }: Timeli
             {Object.entries(categories).map(([category, items]) => (
               Array.isArray(items) && (
                 <div key={category} className="text-xs">
-                  <span className="text-gray-500 font-medium">{category}:</span>{' '}
+                  <span className="text-gray-400 font-medium">{category}:</span>{' '}
                   <span className="text-gray-400">{items.join(', ')}</span>
                 </div>
               )
@@ -76,6 +76,11 @@ interface TimelineItemProps {
 }
 
 function TimelineItem({ item, index, expanded, onToggle }: TimelineItemProps) {
+  // Repeaters (accomplishments, categories) cannot be clicked element by
+  // element, so the card as a whole opens the row in a drawer.
+  const edit = visualEdit(
+    item.directusId ? { collection: ITEMS_COLLECTION, item: item.directusId } : null
+  );
   const duration = calculateDuration(item.dates?.from, item.dates?.to);
   const dateRange = item.dates?.from && item.dates?.to
     ? `${item.dates.from} – ${item.dates.to}`
@@ -98,7 +103,12 @@ function TimelineItem({ item, index, expanded, onToggle }: TimelineItemProps) {
     };
 
   return (
-    <article className="relative" itemScope itemType="https://schema.org/WorkExperience">
+    <article
+      className="relative"
+      itemScope
+      itemType="https://schema.org/WorkExperience"
+      data-directus={edit.item('drawer')}
+    >
       {/* Timeline dot */}
       <div className={`absolute ${TIMELINE_DOT_LEFT_MOBILE} md:${TIMELINE_DOT_LEFT_DESKTOP} top-6 -translate-x-1/2 z-10`}>
         <div
@@ -122,11 +132,11 @@ function TimelineItem({ item, index, expanded, onToggle }: TimelineItemProps) {
           {/* Date column (desktop only) */}
           <div className="hidden md:flex flex-col gap-1 items-start w-48 shrink-0 text-left pl-4 pr-4">
             {duration && (
-              <div className="text-xs font-mono text-teal-accent uppercase tracking-wide">
+              <div className="text-xs font-mono text-accent-text uppercase tracking-wide">
                 {duration}
               </div>
             )}
-            <div className="text-sm font-semibold text-gray-500">
+            <div className="text-sm font-semibold text-gray-400">
               {dateRange}
             </div>
           </div>
@@ -144,15 +154,20 @@ function TimelineItem({ item, index, expanded, onToggle }: TimelineItemProps) {
                 />
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="text-base md:text-lg font-bold text-white mb-0.5">
+                <h3
+                  className="text-base md:text-lg font-bold text-white mb-0.5"
+                  data-directus={edit.field('role')}
+                >
                   {item.role}
                 </h3>
                 <div className="flex flex-wrap items-center gap-2 text-xs text-gray-400">
-                  <span className="font-medium">{item.company}</span>
+                  <span className="font-medium" data-directus={edit.field('company')}>
+                    {item.company}
+                  </span>
                   {item.location && (
                     <>
-                      <span className="text-gray-600">•</span>
-                      <span className="text-gray-500">{item.location}</span>
+                      <span className="text-gray-500">•</span>
+                      <span className="text-gray-400">{item.location}</span>
                     </>
                   )}
                 </div>
@@ -160,26 +175,29 @@ function TimelineItem({ item, index, expanded, onToggle }: TimelineItemProps) {
             </div>
 
             {/* Date range (mobile only) */}
-            <div className="md:hidden text-xs text-gray-500 mb-2 flex items-center gap-2">
+            <div className="md:hidden text-xs text-gray-400 mb-2 flex items-center gap-2">
               {duration && (
-                <span className="font-mono text-teal-accent">{duration}</span>
+                <span className="font-mono text-accent-text">{duration}</span>
               )}
               <span>{dateRange}</span>
             </div>
 
             {/* Summary */}
-            <p className="text-sm text-gray-300 leading-relaxed mb-3">
+            <p
+              className="text-sm text-gray-300 leading-relaxed mb-3"
+              data-directus={edit.field('summary')}
+            >
               {item.summary}
             </p>
 
             {/* Showcased skills (when collapsed or simple) */}
             {(!expanded || isSimpleItem) && previewSkills.length > 0 && (
-              <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] md:text-xs text-gray-500">
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] md:text-xs text-gray-400">
                 {previewSkills.map((skill, idx) => (
                   <div key={idx} className="flex items-center">
                     <span>{skill}</span>
                     {idx < previewSkills.length - 1 && (
-                      <span className="ml-2 text-gray-700">•</span>
+                      <span className="ml-2 text-gray-500">•</span>
                     )}
                   </div>
                 ))}
@@ -189,29 +207,26 @@ function TimelineItem({ item, index, expanded, onToggle }: TimelineItemProps) {
         </div>
       </Wrapper>
 
-      {/* Expanded details */}
+      {/* Expanded details: 0fr -> 1fr animates to the content's natural height
+          in CSS, so no animation library is shipped for one accordion. */}
       {!isSimpleItem && (
-        <AnimatePresence>
-          {expanded && (
-            <motion.div
-              id={`timeline-${index}`}
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="overflow-hidden"
-            >
-              <div className="glass-strong rounded-b-lg ml-14 md:ml-0 -mt-2">
-                <div className="md:ml-48">
-                  <TimelineDetails
-                    accomplishments={item.accomplishments}
-                    categories={item.categories}
-                  />
-                </div>
+        <div
+          id={`timeline-${index}`}
+          aria-hidden={!expanded}
+          className="grid overflow-hidden motion-safe:transition-[grid-template-rows] duration-200 ease-out"
+          style={{ gridTemplateRows: expanded ? '1fr' : '0fr' }}
+        >
+          <div className="min-h-0">
+            <div className="glass-strong rounded-b-lg ml-14 md:ml-0 -mt-2">
+              <div className="md:ml-48">
+                <TimelineDetails
+                  accomplishments={item.accomplishments}
+                  categories={item.categories}
+                />
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            </div>
+          </div>
+        </div>
       )}
     </article>
   );

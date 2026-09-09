@@ -1,0 +1,12 @@
+# Docker reads .dockerignore from the build context root, which is this
+# directory — not from next to the Dockerfile. Without this file, local
+# node_modules and .next are uploaded as context and copied over the ones
+# installed in the image, and .env.local lands in the builder stage.
+node_modules/
+.next/
+.git/
+.gitignore
+.env
+.env.*
+!.env.example
+*.md

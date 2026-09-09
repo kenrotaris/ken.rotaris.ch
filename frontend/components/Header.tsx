@@ -26,7 +26,7 @@ export default function Header({ email, website, showResume, hidden, timezone = 
           <div className="text-gray-200 text-xs font-bold tracking-[0.2em] uppercase truncate hidden sm:block" suppressHydrationWarning>
             {greeting}
           </div>
-          <div className="text-[10px] theme-transition font-mono text-gray-500 font-medium tracking-widest mt-0.5 opacity-60 hidden sm:block" suppressHydrationWarning>
+          <div className="text-[10px] theme-transition font-mono text-gray-400 font-medium tracking-widest mt-0.5 opacity-80 hidden sm:block" suppressHydrationWarning>
             {time}
           </div>
         </div>
@@ -34,7 +34,7 @@ export default function Header({ email, website, showResume, hidden, timezone = 
           {showResume && (
             <Link
               href="/resume"
-              className="group flex items-center gap-2 text-xs md:text-sm font-medium text-gray-400 hover:text-teal-accent transition-colors tracking-wide uppercase"
+              className="group flex items-center gap-2 text-xs md:text-sm font-medium text-gray-400 hover:text-accent-text transition-colors tracking-wide uppercase"
             >
               <FileText className="w-4 h-4" />
               <span>Resume</span>
@@ -43,7 +43,7 @@ export default function Header({ email, website, showResume, hidden, timezone = 
           {email && (
             <a
               href={generateContactLink(email, website)}
-              className="group flex items-center gap-2 text-xs md:text-sm font-medium text-gray-400 hover:text-teal-accent transition-colors tracking-wide uppercase"
+              className="group flex items-center gap-2 text-xs md:text-sm font-medium text-gray-400 hover:text-accent-text transition-colors tracking-wide uppercase"
             >
               <Mail className="w-4 h-4" />
               <span>Contact</span>

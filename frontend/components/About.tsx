@@ -4,15 +4,19 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { ChevronDown } from 'lucide-react';
 import { Hero } from '@/lib/types';
+import { visualEdit, SETTINGS_COLLECTION } from '@/lib/visual-editing';
 
 const SCROLL_INDICATOR_THRESHOLD = 100;
 
 interface AboutProps {
   data?: Hero;
+  /** Directus settings row id; enables click-to-edit when present. */
+  settingsId?: string;
 }
 
-export default function About({ data }: AboutProps) {
+export default function About({ data, settingsId }: AboutProps) {
   const [showScroll, setShowScroll] = useState(true);
+  const edit = visualEdit(settingsId ? { collection: SETTINGS_COLLECTION, item: settingsId } : null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,18 +50,27 @@ export default function About({ data }: AboutProps) {
 
         <div className="space-y-4">
           {data.name && (
-            <h1 className="text-3xl md:text-6xl font-bold tracking-tight text-white">
+            <h1
+              className="text-3xl md:text-6xl font-bold tracking-tight text-white"
+              data-directus={edit.field('hero_name')}
+            >
               {data.name}
             </h1>
           )}
           {data.title && (
-            <h2 className="text-base md:text-xl text-teal-accent font-light tracking-wide">
+            <h2
+              className="text-base md:text-xl text-accent-text font-light tracking-wide"
+              data-directus={edit.field('hero_title')}
+            >
               {data.title}
             </h2>
           )}
 
           {data.bio && (
-            <p className="max-w-2xl mx-auto text-sm md:text-base text-gray-400 leading-relaxed pb-8 md:pb-0">
+            <p
+              className="max-w-2xl mx-auto text-sm md:text-base text-gray-400 leading-relaxed pb-8 md:pb-0"
+              data-directus={edit.field('hero_bio')}
+            >
               {data.bio}
             </p>
           )}
@@ -66,7 +79,7 @@ export default function About({ data }: AboutProps) {
 
       {showScroll && (
         <div
-          className="fixed bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-0 text-gray-500 cursor-pointer hover:text-teal-accent transition-colors animate-bounce"
+          className="fixed bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-0 text-gray-400 cursor-pointer hover:text-accent-text transition-colors animate-bounce"
           onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
         >
           <ChevronDown className="w-5 h-5 -mb-3" strokeWidth={1} />
