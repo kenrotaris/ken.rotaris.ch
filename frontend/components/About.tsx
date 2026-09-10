@@ -36,13 +36,13 @@ export default function About({ data, settingsId }: AboutProps) {
     <section className="min-h-screen flex items-center justify-center pt-20 relative">
       <div className="max-w-4xl mx-auto text-center px-6 pb-16">
         <div className="mb-8 flex justify-center">
-          <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden relative">
+          <div className="w-40 h-40 md:w-52 md:h-52 relative">
             <Image
-              src="/images/profile.png"
+              src="/images/ken-circle.png"
               alt={data.name || 'Profile'}
               fill
-              sizes="(max-width: 768px) 128px, 160px"
-              className="object-cover"
+              sizes="(max-width: 768px) 160px, 208px"
+              className="object-contain"
               priority
             />
           </div>
