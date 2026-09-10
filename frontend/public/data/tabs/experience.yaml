@@ -69,12 +69,12 @@ items:
         - Elasticsearch
         - Kibana
         - MinIO
-    company: ELCA (IIM)
+    company: ELCA Informatik (IIM Solutions)
     companyDescription: ELCA IIM is a leading provider for ECM, smart document solutions, and process automation.
     logo: /images/companies/elca.png
-    location: Altstätten, CH
+    location: Zürich Altstätten, CH
     link: https://www.elca.ch/
-  - role: Web Developer
+  - role: DevOps Engineer
     dates:
       from: Jan 2020
       to: present

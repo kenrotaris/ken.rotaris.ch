@@ -1,6 +1,6 @@
 hero:
   name: KEN ROTARIS
-  title: Full Stack Developer & DevOps Engineer
+  title: Full-Stack DevOps Engineer
   bio: Systems-focused engineer with 7+ years in software development, specializing in Java backend and modern infrastructure. I build production systems grounded in clarity, reliability, and automation.
   email: ken@rotaris.ch
   website: ken.rotaris.ch
@@ -20,17 +20,17 @@ theme:
     background: "#4D00FF"
   timezone: CET
 resume:
-  subtitle: Bachelor in Computer Science | 7 years of experience | DevOps, Backend & Frontend Development
+  subtitle: Bachelor in Computer Science | DevOps, Backend & Frontend Development
   left-section:
     summary:
       - Systems-focused software engineer with 7+ years of experience in web development, backend systems, and DevOps. Strong background in Java-based systems and modern infrastructure, with an emphasis on automation, operational reliability, and maintainable code. I design systems where intent is clear at the top and complexity is revealed gradually.
     technicalSkills:
-      - "Backend: Java, Spring Framework, Quarkus, Hibernate, JPA, REST APIs, JUnit, Mockito, MapStruct, QueryDSL, OpenAPI, Flyway, SLF4J, REST, Jakarta EE"
-      - "Frontend: Angular, TypeScript, HTML, SCSS, React, RxJS, Karma, Jasmine"
-      - "Database: PostgreSQL, MySQL, MongoDB, Oracle, H2"
-      - "DevOps: Docker, Kubernetes, OKD/OpenShift, Jenkins, CI/CD Pipelines, Nginx, MinIO, Azure AD, Linux"
-      - "Tools: Maven, Gradle, IntelliJ, VSCode, Git, GitHub, Elasticsearch, OpenSearch, Kibana, Postman, SonarQube"
-      - "AI & Automation: Python, Bash/Shell/Powershell Scripting, AI Tools for Enhanced Development (Claude Code etc.)"
+      - "DevOps: Docker, Kubernetes, OKD/OpenShift, Jenkins, CI/CD, ArgoCD, Flux, HelmCharts, Nginx, Grafana, Harbor, JFrog, S3 Lifecycle (MinIO), Azure AD, Linux, Windows, Elasticsearch, OpenSearch, Kibana, Postman, SonarQube, Velero, Terraform, Hashicorp"
+      - "Back-End: Java, Spring, Quarkus, Hibernate, JPA, REST APIs, JUnit, Mockito, MapStruct, QueryDSL, OpenAPI, Flyway, SLF4J, Jakarta EE, Maven, Gradle, PostgreSQL, MySQL, MongoDB, Oracle, H2"
+      - "Front-End: Angular, TypeScript, HTML, SCSS, React, RxJS, Karma, Jasmine, Cypress, Playwright"
+      - "AI & Automation: AI Tools for Enhanced Development (Claude Code etc.), Python, Bash/Shell/Powershell Scripting"
+      - "Tools: IntelliJ, VSCode, Git, GitHub"
+      - "Methods & Delivery: Agile, Scrum, Kanban, IT project management"
     softSkills:
       - Robust and driven, eager to learn, persistent, result-oriented, innovative and out-of-the box thinking.
       - Team player with strong interpersonal skills and the ability to work independently.

@@ -99,6 +99,13 @@ const createStyles = (accentColor: string) => StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'baseline',
     },
+    // Takes the width left over by location/dates, so long company
+    // descriptions wrap instead of running underneath them.
+    itemHeaderMain: {
+        // An explicit cap, because react-pdf does not shrink this flex item:
+        // it keeps its content width and runs under the location instead.
+        maxWidth: '76%',
+    },
     itemContent: {
         paddingLeft: 6, // Half of lg (12pt) for reduced indent
     },
@@ -110,6 +117,9 @@ const createStyles = (accentColor: string) => StyleSheet.create({
     location: {
         fontSize: RESUME_CONFIG.typography.fontSizes.small,
         color: RESUME_CONFIG.colors.gray[500],
+        // Never shrink or wrap the location; the company line yields instead.
+        flexShrink: 0,
+        paddingLeft: 6,
     },
     role: {
         fontSize: RESUME_CONFIG.typography.fontSizes.body,
@@ -277,12 +287,14 @@ export function createResumeDocument(portfolio: Portfolio): ReactElement<Documen
                                 <View style={styles.itemHeader} wrap={false}>
                                     {/* Row 1: Company Name - Description + Location */}
                                     <View style={styles.itemHeaderRow}>
-                                        <Text>
-                                            <Text style={styles.companyName}>{item.company}</Text>
-                                            {item.companyDescription && item.role && (
-                                                <Text style={styles.description}> - {item.companyDescription}</Text>
-                                            )}
-                                        </Text>
+                                        <View style={styles.itemHeaderMain}>
+                                            <Text>
+                                                <Text style={styles.companyName}>{item.company}</Text>
+                                                {item.companyDescription && item.role && (
+                                                    <Text style={styles.description}> - {item.companyDescription}</Text>
+                                                )}
+                                            </Text>
+                                        </View>
                                         {item.location && (
                                             <Text style={styles.location}>{item.location}</Text>
                                         )}
@@ -305,7 +317,10 @@ export function createResumeDocument(portfolio: Portfolio): ReactElement<Documen
                                     )}
                                     {item.categories && (
                                         <Text style={styles.techStack}>
-                                            Technologies: {[...new Set(Object.values(item.categories).flat().filter(Boolean))].join(', ')}
+                                            Technologies: {[...new Set(Object.entries(item.categories)
+                                                .filter(([key]) => key !== 'label')
+                                                .flatMap(([, value]) => value)
+                                                .filter(Boolean))].join(', ')}
                                         </Text>
                                     )}
                                 </View>
@@ -416,7 +431,10 @@ export function createResumeDocument(portfolio: Portfolio): ReactElement<Documen
                                     )}
                                     {item.categories && (
                                         <Text style={styles.techStack}>
-                                            Technologies: {[...new Set(Object.values(item.categories).flat().filter(Boolean))].join(', ')}
+                                            Technologies: {[...new Set(Object.entries(item.categories)
+                                                .filter(([key]) => key !== 'label')
+                                                .flatMap(([, value]) => value)
+                                                .filter(Boolean))].join(', ')}
                                         </Text>
                                     )}
                                 </View>
