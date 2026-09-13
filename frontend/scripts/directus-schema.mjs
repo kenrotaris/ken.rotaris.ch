@@ -132,6 +132,10 @@ export const COLLECTIONS = [
       text('hero_bio', { name: 'Bio' }),
       str('hero_email', { name: 'Email', width: 'half' }),
       str('hero_website', { name: 'Website', width: 'half', note: 'Without https://' }),
+      str('hero_resume_url', {
+        name: 'Resume URL',
+        note: 'Externally hosted resume (e.g. a Google Docs PDF export). Empty hides the link.',
+      }),
 
       str('meta_title', { name: 'SEO title' }),
       text('meta_description', { name: 'SEO description' }),

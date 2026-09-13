@@ -32,7 +32,7 @@ export default function HomeClient({ data, directusUrl }: HomeClientProps) {
         <Header
           email={data.footer?.social?.email || data.hero?.email}
           website={data.hero?.website}
-          showResume={!!data.resume}
+          resumeUrl={data.hero?.resumeUrl}
           hidden={isTabsSticky}
           timezone={timezone}
         />

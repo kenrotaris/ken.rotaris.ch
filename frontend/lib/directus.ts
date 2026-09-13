@@ -35,7 +35,7 @@ interface RepeaterCategory { category?: string; skills?: string }
 interface SettingsRow {
   id?: string;
   hero_name?: string; hero_title?: string; hero_bio?: string;
-  hero_email?: string; hero_website?: string;
+  hero_email?: string; hero_website?: string; hero_resume_url?: string;
   meta_title?: string; meta_description?: string; meta_author?: string;
   theme_accent?: string; theme_background?: string; theme_timezone?: string;
   social_linkedin?: string; social_github?: string;
@@ -167,6 +167,7 @@ export async function fetchPortfolioFromDirectus(): Promise<Portfolio | null> {
         bio: settings.hero_bio,
         email: settings.hero_email,
         website: settings.hero_website,
+        resumeUrl: settings.hero_resume_url,
       },
       metadata: {
         title: settings.meta_title,

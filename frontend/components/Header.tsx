@@ -3,17 +3,17 @@
 import { Mail, FileText } from 'lucide-react';
 import { generateContactLink } from '@/lib/utils';
 import { useCurrentTime } from '@/hooks/useCurrentTime';
-import Link from 'next/link';
 
 interface HeaderProps {
   email?: string;
   website?: string;
-  showResume?: boolean;
+  /** Externally hosted resume; the link is hidden when unset. */
+  resumeUrl?: string;
   hidden: boolean;
   timezone?: string;
 }
 
-export default function Header({ email, website, showResume, hidden, timezone = 'UTC' }: HeaderProps) {
+export default function Header({ email, website, resumeUrl, hidden, timezone = 'UTC' }: HeaderProps) {
   const { greeting, time } = useCurrentTime(timezone);
 
   return (
@@ -31,14 +31,16 @@ export default function Header({ email, website, showResume, hidden, timezone = 
           </div>
         </div>
         <div className="flex gap-6 md:gap-8 items-center">
-          {showResume && (
-            <Link
-              href="/resume"
+          {resumeUrl && (
+            <a
+              href={resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group flex items-center gap-2 text-xs md:text-sm font-medium text-gray-400 hover:text-accent-text transition-colors tracking-wide uppercase"
             >
               <FileText className="w-4 h-4" />
               <span>Resume</span>
-            </Link>
+            </a>
           )}
           {email && (
             <a
