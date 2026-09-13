@@ -1,202 +1,250 @@
 label: Projects
 resumeMaxItems: 3
 items:
-  - role: ATS-Optimized Portfolio & Resume Generator
-    dates:
-      from: Feb 2026
-    summary: Extended existing portfolio website with YAML-driven templating and auto-generated ATS-friendly resumes
-    accomplishments:
-      - Built a template-driven portfolio system enabling non-technical users to create personalized websites by editing configuration files.
-      - Developed automated resume PDF generation optimized for Applicant Tracking Systems (ATS), maximizing recruiter visibility.
-    categories:
-      Skills:
-        - ATS Optimization
-        - Data-Driven Design
-        - PDF Generation
-        - YAML Processing
-        - Next.js
-        - React
-        - TypeScript
-        - Tailwind CSS
-    company: Open-Source Portfolio Framework
-    logo: /images/projects/resume-creator.png
-    location: Freetime
-    link: https://github.com/kenrotaris/ken.rotaris.ch
-  - role: GitOps-Managed Cloud Infrastructure
-    dates:
-      from: "2026"
-    summary: Architected a declarative, self-healing Kubernetes platform using ArgoCD for effortless infrastructure management.
-    accomplishments:
-      - Designed and ran a self-hosted GitOps Kubernetes platform with ArgoCD, Tekton CI/CD, Vault secrets, Harbor registry, TLS, backups, and monitoring.
-      - Automated build, deploy, and recovery workflows with reproducible, policy-enforced infrastructure.
-    categories:
-      Platform:
-        - Kubernetes
-        - Linux
-        - Hetzner Cloud
-      Infrastructure & Security:
-        - Traefik
-        - HashiCorp Vault
-        - Authentik
-        - Velero
-      CI/CD & GitOps:
-        - ArgoCD
-        - Helm
-        - GitOps
-        - Tekton
-      Monitoring:
-        - Prometheus
-        - Grafana
-    company: Self-Hosted Kubernetes Cluster
-    logo: /images/projects/kubernetes.png
-    location: Freetime
-    link: https://rotaris.ch
-  - role: Browser Speed Reading Tool
-    dates:
-      from: Sep 2024
-    summary: Developed a browser extension enhancing reading speed through bionic reading.
-    accomplishments:
-      - Developed a Chrome extension that boosts reading speed and comprehension by bolding the first third of each word on any webpage.
-    categories:
-      Backend:
-        - JavaScript
-        - CSS
-        - Chrome DevTools
-      Frontend:
-        - JavaScript
-        - HTML
-        - CSS
-        - Chrome DevTools
-    company: Chrome Extension
-    logo: /images/projects/bold-speed.png
-    location: Freetime
-    link: https://github.com/kenrotaris/chrome-speed-reading-extension
-  - role: Full-Stack Web Platform
-    dates:
-      from: Aug 2024
-    summary: Architected a modern, automated personal brand platform with CI/CD and containerized deployment.
-    accomplishments:
-      - Built a React app auto-deployed to my own server via GitHub Actions, with a custom Jenkins pipeline for continuous integration.
-    categories:
-      Platform:
-        - Docker
-        - Linux
-        - Nginx
-      CI/CD:
-        - CI/CD
-        - Jenkins
-      Backend:
-        - CI/CD
-      Frontend:
-        - React
-    company: Personal Portfolio Website
-    logo: /images/projects/fullstack-developer-portfolio.png
-    location: Freetime
-    link: https://github.com/kenrotaris/ken.rotaris.ch
-  - role: Bachelor Thesis
-    dates:
-      from: Jun 2022
-    summary: Modeled complex chess logic using AI planning systems, achieving high efficiency in state reachability analysis.
-    accomplishments:
-      - Developed and compared a domain-independent classical-planning system and a domain-specific solver to assess reachability of any given chess position.
-    categories:
-      Backend:
-        - Java
-        - Python
-        - PDDL
-      Skills:
-        - AI Planning
-        - Algorithm Optimization
-        - Heuristic Search
-    company: Single-Player Chess as a Planning Problem
-    logo: /images/projects/chess-ai.png
-    location: University Basel
-    link: https://github.com/kenrotaris/Bachelor-Thesis_Single-Player-Chess
-  - role: Aggregated diverse inputs into a coherent dataset
-    dates:
-      from: Nov 2021
-    summary: Engineered a data pipeline integrating heterogeneous sources into a unified analytical dataset.
-    accomplishments:
-      - Analyzed 4 GB of U.S. crime and economic data drawn from multiple sources and mixed datatypes, using SQL and Pandas to integrate them into a single coherent dataset. Performed data cleaning, integration, and visualization.
-    categories:
-      Backend:
-        - Python
-      Database:
-        - SQL
-        - Pandas
-      Skills:
-        - Data Engineering
-        - ETL
-        - Data Visualization
-    company: Multi-Source Data Integration
-    logo: /images/projects/data.png
-    location: University Basel
-  - role: Decentralized Messaging System
-    dates:
-      from: May 2021
-    summary: Built a secure, decentralized communication system ensuring privacy without central servers.
-    accomplishments:
-      - Built an end-to-end-encrypted chat application in Python using Tkinter, implementing decentralized peer-to-peer communication over BACnet without relying on a central server.
-    categories:
-      Backend:
-        - Python
-      Skills:
-        - Encryption
-        - Networking
-        - Peer-to-Peer
-        - Security
-    company: Encrypted Peer-to-Peer Chat
-    logo: /images/projects/bacnet.png
-    location: University Basel
-    link: https://github.com/cn-uofbasel/BACnet/tree/master/20-fs-ias-lec/groups/03-subChat
-  - role: Designed and built a modular LED hardware system
-    dates:
-      from: Jan 2021
-    summary: Designed and fabricated custom hardware and firmware for an embedded gaming system.
-    accomplishments:
-      - Designed and built a custom multiplexed LED matrix with simulated circuitry and hand-soldered components, then programmed a plug-in game framework with joystick input in Arduino/C++.
-    categories:
-      Backend:
-        - C++
-        - Circuit Design
-      Skills:
-        - Embedded Systems
-        - Hardware Design
-        - Arduino
-    company: Custom Embedded Game Platform
-    logo: /images/projects/arduino.png
-    location: University Basel
-  - role: Linux Command-Line Integration Tool
-    dates:
-      from: Oct 2020
-    summary: Reimplemented core Linux shell functionality and file system interactions in C.
-    accomplishments:
-      - Developed a minimal Gnome-Terminal-style shell in C, reimplementing 20+ core commands and adding support for mounting remote servers over SSH so they appear as regular local directories.
-    categories:
-      Platform:
-        - Linux
-      Backend:
-        - C
-      Skills:
-        - Systems Programming
-        - Filesystems
-        - SSH
-    company: Custom Linux CLI Shell
-    logo: /images/projects/terminal.png
-    location: University Basel
-  - role: Multiplayer Gorillas Reimplementation
-    dates:
-      from: May 2019
-    summary: Implemented a real-time multiplayer game engine with deterministic physics and networking.
-    accomplishments:
-      - Implemented deterministic physics, collision handling, and a real-time peer-to-peer networking layer in Java for synchronized multiplayer.
-    categories:
-      Backend:
-        - Java
-      Skills:
-        - Networking
-        - Game Physics
-        - Real-time Systems
-    company: Real-Time Multiplayer Game
-    logo: /images/projects/gorillas.png
-    location: University Basel
+- role: Salsa & Bachata Event Aggregator
+  company: Ritmo
+  companyDescription: Crawls dance-event sites across Switzerland into one deduplicated feed.
+  logo: /images/projects/ritmo.svg
+  location: Freetime
+  dates:
+    from: Apr 2026
+    to: Aug 2026
+  summary: Event crawler for salsa, bachata, kizomba and zouk socials. An LLM authors a scraper per site once; the recurring crawl then runs deterministically and merges every source into a single normalized, deduplicated feed.
+  showcasedSkills:
+  - Python
+  - LLM Agents
+  - Playwright
+  - PostgreSQL
+  - Web Scraping
+  accomplishments:
+  - Built a two-speed design where an LLM authors and repairs per-site extractors at setup time, while the daily crawl stays fully deterministic and LLM-free — keeping recurring runs free of API spend and non-determinism.
+  - Added an agentic authoring path where the model drives a real browser through a tool surface (navigate, query, screenshot) and must verify its own selectors against the live DOM before submitting them.
+  - Probed cheaper sources first — iCal feeds, then schema.org structured data — so most sites onboard without any model call at all.
+  - Normalized and deduplicated events across overlapping sites using fuzzy matching and source-tier priority, keeping a current snapshot in Postgres.
+  - 'Made the crawler self-repairing: when a layout change breaks selectors, the site is re-snapshotted and the extractor re-authored, and only promoted if it beats the previous baseline.'
+  - Recovered fields that exist only inside flyer images by OCR-ing them locally with Tesseract, keeping the crawl path deterministic.
+  categories:
+    label: Technologies
+    Crawling:
+    - Playwright
+    - crawl4ai
+    - BeautifulSoup
+    - Trafilatura
+    - extruct
+    - Tesseract OCR
+    AI:
+    - LLM Extractor Authoring
+    - Agentic Tool Use
+    - Prompt Engineering
+    Backend:
+    - Python 3.12
+    - Pydantic
+    - SQLModel
+    - Alembic
+    - PostgreSQL
+    - Typer
+    Pipeline:
+    - Normalization
+    - Fuzzy Deduplication
+    - RapidFuzz
+    - dateparser
+    - iCal
+- role: ATS-Optimized Portfolio & Resume Generator
+  dates:
+    from: Feb 2026
+  summary: Extended existing portfolio website with YAML-driven templating and auto-generated ATS-friendly resumes
+  accomplishments:
+  - Built a template-driven portfolio system enabling non-technical users to create personalized websites by editing configuration files.
+  - Developed automated resume PDF generation optimized for Applicant Tracking Systems (ATS), maximizing recruiter visibility.
+  categories:
+    Skills:
+    - ATS Optimization
+    - Data-Driven Design
+    - PDF Generation
+    - YAML Processing
+    - Next.js
+    - React
+    - TypeScript
+    - Tailwind CSS
+  company: Open-Source Portfolio Framework
+  logo: /images/projects/resume-creator.png
+  location: Freetime
+  link: https://github.com/kenrotaris/ken.rotaris.ch
+- role: GitOps-Managed Cloud Infrastructure
+  dates:
+    from: '2026'
+  summary: Architected a declarative, self-healing Kubernetes platform using ArgoCD for effortless infrastructure management.
+  accomplishments:
+  - Designed and ran a self-hosted GitOps Kubernetes platform with ArgoCD, Tekton CI/CD, Vault secrets, Harbor registry, TLS, backups, and monitoring.
+  - Automated build, deploy, and recovery workflows with reproducible, policy-enforced infrastructure.
+  categories:
+    Platform:
+    - Kubernetes
+    - Linux
+    - Hetzner Cloud
+    Infrastructure & Security:
+    - Traefik
+    - HashiCorp Vault
+    - Authentik
+    - Velero
+    CI/CD & GitOps:
+    - ArgoCD
+    - Helm
+    - GitOps
+    - Tekton
+    Monitoring:
+    - Prometheus
+    - Grafana
+  company: Self-Hosted Kubernetes Cluster
+  logo: /images/projects/kubernetes.png
+  location: Freetime
+  link: https://rotaris.ch
+- role: Browser Speed Reading Tool
+  dates:
+    from: Sep 2024
+  summary: Developed a browser extension enhancing reading speed through bionic reading.
+  accomplishments:
+  - Developed a Chrome extension that boosts reading speed and comprehension by bolding the first third of each word on any webpage.
+  categories:
+    Backend:
+    - JavaScript
+    - CSS
+    - Chrome DevTools
+    Frontend:
+    - JavaScript
+    - HTML
+    - CSS
+    - Chrome DevTools
+  company: Chrome Extension
+  logo: /images/projects/bold-speed.png
+  location: Freetime
+  link: https://github.com/kenrotaris/chrome-speed-reading-extension
+- role: Full-Stack Web Platform
+  dates:
+    from: Aug 2024
+  summary: Architected a modern, automated personal brand platform with CI/CD and containerized deployment.
+  accomplishments:
+  - Built a React app auto-deployed to my own server via GitHub Actions, with a custom Jenkins pipeline for continuous integration.
+  categories:
+    Platform:
+    - Docker
+    - Linux
+    - Nginx
+    CI/CD:
+    - CI/CD
+    - Jenkins
+    Backend:
+    - CI/CD
+    Frontend:
+    - React
+  company: Personal Portfolio Website
+  logo: /images/projects/fullstack-developer-portfolio.png
+  location: Freetime
+  link: https://github.com/kenrotaris/ken.rotaris.ch
+- role: Bachelor Thesis
+  dates:
+    from: Jun 2022
+  summary: Modeled complex chess logic using AI planning systems, achieving high efficiency in state reachability analysis.
+  accomplishments:
+  - Developed and compared a domain-independent classical-planning system and a domain-specific solver to assess reachability of any given chess position.
+  categories:
+    Backend:
+    - Java
+    - Python
+    - PDDL
+    Skills:
+    - AI Planning
+    - Algorithm Optimization
+    - Heuristic Search
+  company: Single-Player Chess as a Planning Problem
+  logo: /images/projects/chess-ai.png
+  location: University Basel
+  link: https://github.com/kenrotaris/Bachelor-Thesis_Single-Player-Chess
+- role: Aggregated diverse inputs into a coherent dataset
+  dates:
+    from: Nov 2021
+  summary: Engineered a data pipeline integrating heterogeneous sources into a unified analytical dataset.
+  accomplishments:
+  - Analyzed 4 GB of U.S. crime and economic data drawn from multiple sources and mixed datatypes, using SQL and Pandas to integrate them into a single coherent dataset. Performed data cleaning, integration, and visualization.
+  categories:
+    Backend:
+    - Python
+    Database:
+    - SQL
+    - Pandas
+    Skills:
+    - Data Engineering
+    - ETL
+    - Data Visualization
+  company: Multi-Source Data Integration
+  logo: /images/projects/data.png
+  location: University Basel
+- role: Decentralized Messaging System
+  dates:
+    from: May 2021
+  summary: Built a secure, decentralized communication system ensuring privacy without central servers.
+  accomplishments:
+  - Built an end-to-end-encrypted chat application in Python using Tkinter, implementing decentralized peer-to-peer communication over BACnet without relying on a central server.
+  categories:
+    Backend:
+    - Python
+    Skills:
+    - Encryption
+    - Networking
+    - Peer-to-Peer
+    - Security
+  company: Encrypted Peer-to-Peer Chat
+  logo: /images/projects/bacnet.png
+  location: University Basel
+  link: https://github.com/cn-uofbasel/BACnet/tree/master/20-fs-ias-lec/groups/03-subChat
+- role: Designed and built a modular LED hardware system
+  dates:
+    from: Jan 2021
+  summary: Designed and fabricated custom hardware and firmware for an embedded gaming system.
+  accomplishments:
+  - Designed and built a custom multiplexed LED matrix with simulated circuitry and hand-soldered components, then programmed a plug-in game framework with joystick input in Arduino/C++.
+  categories:
+    Backend:
+    - C++
+    - Circuit Design
+    Skills:
+    - Embedded Systems
+    - Hardware Design
+    - Arduino
+  company: Custom Embedded Game Platform
+  logo: /images/projects/arduino.png
+  location: University Basel
+- role: Linux Command-Line Integration Tool
+  dates:
+    from: Oct 2020
+  summary: Reimplemented core Linux shell functionality and file system interactions in C.
+  accomplishments:
+  - Developed a minimal Gnome-Terminal-style shell in C, reimplementing 20+ core commands and adding support for mounting remote servers over SSH so they appear as regular local directories.
+  categories:
+    Platform:
+    - Linux
+    Backend:
+    - C
+    Skills:
+    - Systems Programming
+    - Filesystems
+    - SSH
+  company: Custom Linux CLI Shell
+  logo: /images/projects/terminal.png
+  location: University Basel
+- role: Multiplayer Gorillas Reimplementation
+  dates:
+    from: May 2019
+  summary: Implemented a real-time multiplayer game engine with deterministic physics and networking.
+  accomplishments:
+  - Implemented deterministic physics, collision handling, and a real-time peer-to-peer networking layer in Java for synchronized multiplayer.
+  categories:
+    Backend:
+    - Java
+    Skills:
+    - Networking
+    - Game Physics
+    - Real-time Systems
+  company: Real-Time Multiplayer Game
+  logo: /images/projects/gorillas.png
+  location: University Basel
