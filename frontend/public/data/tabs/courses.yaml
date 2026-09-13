@@ -1,105 +1,88 @@
 label: Courses & Certifications
 items:
-  - role: Amazon Web Services
-    summary: Planned certification covering the design of resilient, high-performing, secure, and cost-optimized architectures on AWS, including compute, storage, networking, and identity services.
-    dates:
-      from: Nov 2026
-    categories:
-      label: Topics Covered
-      DevOps:
-        - AWS
-        - Cloud Architecture
-      Skills:
-        - High Availability
-        - Cost Optimization
-        - Security
-    company: AWS Certified Solutions Architect – Associate
-    logo: /images/education/aws.svg
-    location: Online
-    link: https://aws.amazon.com/de/certification/certified-solutions-architect-associate/
-  - role: SCRUMstudy
-    summary: Covered core Scrum principles, roles, events, and artifacts, with a focus on iterative delivery, team collaboration, and applying Scrum effectively in real-world software projects.
-    categories:
-      label: Topics Covered
-      Skills:
-        - Scrum
-        - Agile
-    company: Scrum Fundamentals
-    dates:
-      from: Oct 2025
-    logo: /images/education/scrum-study.png
-    location: Online
-    link: https://c46e136a583f7e334124-ac22991740ab4ff17e21daf2ed577041.ssl.cf1.rackcdn.com/Certificate/ScrumFundamentalsCertified-KenRotaris-1110976.pdf
-  - role: DataCamp
-    summary: Learned to extract, clean, and structure data from websites using Python, including HTTP requests, HTML parsing, and handling common scraping challenges responsibly.
-    categories:
-      label: Topics Covered
-      Backend:
-        - Python
-      Skills:
-        - Web Scraping
-        - Data
-    company: Web Scraping in Python
-    dates:
-      from: Oct 2025
-    logo: /images/education/data-camp.jpg
-    location: Online
-    link: https://www.datacamp.com/completed/statement-of-accomplishment/course/745cd44a3a6b8dcaa292752c8c54bea72005a986
-  - role: Jonas Bandi
-    summary: Completed a specialized course in Angular and TypeScript, instructed by Jonas Bandi, enhancing my skills in modern web application development.
-    categories:
-      label: Topics Covered
-      Frontend:
-        - Angular
-      Skills:
-        - Typescript
-    company: Angular & TypeScript Course & Training
-    dates:
-      from: Jun 2024
-    logo: /images/education/angular.svg
-    location: Bern, CH
-    link: https://www.letsboot.ch/en-gb/course/angular-typescript
-  - role: CodinGame
-    summary: Obtained a certification in Java programming from CodingGame, demonstrating proficiency in Java development and problem-solving skills.
-    categories:
-      label: Topics Covered
-      Backend:
-        - Java
-      Skills:
-        - Problem Solving
-    company: Java Certification
-    dates:
-      from: Mar 2024
-    logo: /images/education/codingame.svg
-    location: Online
-    link: https://www.codingame.com/certification/o3JCl4HBV5hY2rXq8_dqsg
-  - role: Google
-    summary: Completed a Google Cloud course on Generative AI Fundamentals, gaining an understanding of AI technologies, large language models, and ethical AI principles.
-    categories:
-      label: Topics Covered
-      Backend:
-        - Python
-      Skills:
-        - Machine Learning
-        - Large Language Models
-    company: Generative AI Fundamentals
-    dates:
-      from: Feb 2024
-    logo: /images/education/google.png
-    location: Online
-    link: https://www.cloudskillsboost.google/public_profiles/c8878034-0793-4845-a997-aa046b3345eb/
-  - role: Baeldung
-    summary: Successfully completed Baeldung's Spring Framework Certification Class, deepening expertise in enterprise application development with Spring.
-    categories:
-      label: Topics Covered
-      Backend:
-        - Spring Framework
-        - Java
-      Skills:
-        - REST API
-    company: "Spring Framework: The Certification Class"
-    dates:
-      from: Apr 2023
-    logo: /images/education/baeldung.jpg
-    location: Online
-    link: https://courses.baeldung.com/courses/1288580/certificate
+- role: SCRUMstudy
+  summary: Covered core Scrum principles, roles, events, and artifacts, with a focus on iterative delivery, team collaboration, and applying Scrum effectively in real-world software projects.
+  categories:
+    label: Topics Covered
+    Skills:
+    - Scrum
+    - Agile
+  company: Scrum Fundamentals
+  dates:
+    from: Oct 2025
+  logo: /images/education/scrum-study.png
+  location: Online
+  link: https://c46e136a583f7e334124-ac22991740ab4ff17e21daf2ed577041.ssl.cf1.rackcdn.com/Certificate/ScrumFundamentalsCertified-KenRotaris-1110976.pdf
+- role: DataCamp
+  summary: Learned to extract, clean, and structure data from websites using Python, including HTTP requests, HTML parsing, and handling common scraping challenges responsibly.
+  categories:
+    label: Topics Covered
+    Backend:
+    - Python
+    Skills:
+    - Web Scraping
+    - Data
+  company: Web Scraping in Python
+  dates:
+    from: Oct 2025
+  logo: /images/education/data-camp.jpg
+  location: Online
+  link: https://www.datacamp.com/completed/statement-of-accomplishment/course/745cd44a3a6b8dcaa292752c8c54bea72005a986
+- role: Jonas Bandi
+  summary: Completed a specialized course in Angular and TypeScript, instructed by Jonas Bandi, enhancing my skills in modern web application development.
+  categories:
+    label: Topics Covered
+    Frontend:
+    - Angular
+    Skills:
+    - Typescript
+  company: Angular & TypeScript Course & Training
+  dates:
+    from: Jun 2024
+  logo: /images/education/angular.svg
+  location: Bern, CH
+  link: https://www.letsboot.ch/en-gb/course/angular-typescript
+- role: CodinGame
+  summary: Obtained a certification in Java programming from CodingGame, demonstrating proficiency in Java development and problem-solving skills.
+  categories:
+    label: Topics Covered
+    Backend:
+    - Java
+    Skills:
+    - Problem Solving
+  company: Java Certification
+  dates:
+    from: Mar 2024
+  logo: /images/education/codingame.svg
+  location: Online
+  link: https://www.codingame.com/certification/o3JCl4HBV5hY2rXq8_dqsg
+- role: Google
+  summary: Completed a Google Cloud course on Generative AI Fundamentals, gaining an understanding of AI technologies, large language models, and ethical AI principles.
+  categories:
+    label: Topics Covered
+    Backend:
+    - Python
+    Skills:
+    - Machine Learning
+    - Large Language Models
+  company: Generative AI Fundamentals
+  dates:
+    from: Feb 2024
+  logo: /images/education/google.png
+  location: Online
+  link: https://www.cloudskillsboost.google/public_profiles/c8878034-0793-4845-a997-aa046b3345eb/
+- role: Baeldung
+  summary: Successfully completed Baeldung's Spring Framework Certification Class, deepening expertise in enterprise application development with Spring.
+  categories:
+    label: Topics Covered
+    Backend:
+    - Spring Framework
+    - Java
+    Skills:
+    - REST API
+  company: 'Spring Framework: The Certification Class'
+  dates:
+    from: Apr 2023
+  logo: /images/education/baeldung.jpg
+  location: Online
+  link: https://courses.baeldung.com/courses/1288580/certificate
