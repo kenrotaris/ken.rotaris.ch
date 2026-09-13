@@ -1,142 +1,188 @@
 label: Experience
 items:
-  - role: DevOps Engineer
-    dates:
-      from: Apr 2025
-      to: present
-    summary: Accelerated release cycles by modernizing CI/CD infrastructure, migrated infrastructure to Kubernetes and automating containerized deployments.
-    showcasedSkills:
-      - Kubernetes
-      - OpenShift
-      - Docker
-      - Jenkins
-      - GitOps
-    accomplishments:
-      - Re-architected Jenkins CI/CD using versioned Jenkinsfiles and shared libraries.
-      - Introduced Docker image build automation across repos, eliminating 200+ scripts and reducing build times 5x.
-      - Implemented cross-repo backend changes to enable reliable builds, tests, and cloud-native deployments.
-    categories:
-      label: Technologies
-      Platform & Infrastructure:
-        - Kubernetes
-        - OpenShift
-        - Docker
-        - Helm
-        - Terraform
-        - Ansible
-      CI/CD & Delivery:
-        - Jenkins
-        - ArgoCD
-        - FluxCD
-      Backend & Languages:
-        - Java
-        - Quarkus
-        - Groovy
-        - Bash / Shell scripting
-    company: aXenta AG
-    companyDescription: Axenta is the leading provider for Swiss pension fund software.
-    logo: /images/companies/aXenta.jpg
-    location: Baden-Dättwil, CH
-    link: https://www.axenta.ch/
-  - role: Fullstack Engineer
-    dates:
-      from: Oct 2022
-      to: Mar 2025
-    summary: Contributed to large-scale enterprise document management systems, focusing on data migrations, frontend modernization, and high-performance backend improvements.
-    accomplishments:
-      - Built a high-throughput data migration tool with integrity guarantees, used by enterprise clients to migrate millions of documents.
-      - Modernized enterprise applications by migrating a Vaadin ETL-UI to Angular and designing a license and contract management system from scratch.
-      - Delivered up to 37x backend performance gains through query optimization and migrated a Java EE application to Spring.
-    categories:
-      Platform:
-        - Docker
-        - OpenShift
-        - Linux
-        - Jenkins
-      Backend:
-        - Java
-        - Spring Framework
-        - JPA / Hibernate
-        - Flyway
-        - Maven
-      Frontend:
-        - Angular
-        - HTML
-        - SCSS
-        - RxJS
-      Database & Search:
-        - PostgreSQL
-        - Elasticsearch
-        - Kibana
-        - MinIO
-    company: ELCA Informatik (IIM Solutions)
-    companyDescription: ELCA IIM is a leading provider for ECM, smart document solutions, and process automation.
-    logo: /images/companies/elca.png
-    location: Zürich Altstätten, CH
-    link: https://www.elca.ch/
-  - role: DevOps Engineer
-    dates:
-      from: Jan 2020
-      to: present
-    summary: Developed and maintained WordPress-based websites and hosting solutions for small and mid-sized clients.
-    accomplishments:
-      - Designed and operated a Linux- and Nginx-based WordPress hosting platform for internal client deployments.
-      - Developed, customized, and maintained WordPress plugins and sites for 20+ clients.
-    categories:
-      label: Technologies
-      Platform:
-        - Nginx
-        - Linux
-      Backend:
-        - PHP
-        - JavaScript
-      Frontend:
-        - JavaScript
-        - HTML
-        - CSS
-      Skills:
-        - Web Hosting
-        - Client Projects
-    company: Webmo
-    companyDescription: Webmo is a web agency offering web hosting, web development, and digital marketing.
-    logo: /images/companies/webmo.png
-    location: Olten, CH
-    link: https://webmo.ch/
-  - role: Startup Co-Founder
-    dates:
-      from: Dec 2014
-      to: Dec 2020
-    summary: Co-founded and scaled a digital media business with multi-million-subscriber reach and seven-figure annual views.
-    accomplishments:
-      - Built and executed a content strategy resulting in a peak revenue of CHF 35,000/month.
-      - Improved retention and growth using data-driven content optimization.
-      - Led 20 animators delivering content with 3.9M subscribers and 1.2B+ views.
-    categories:
-      Skills:
-        - Content Strategy
-        - Leadership
-        - Operations
-        - Digital Marketing
-    company: Mount Vantage GmbH
-    companyDescription: Mount Vantage is a Digital media holding company operating large-scale YouTube brands.
-    logo: /images/companies/mount-vantage.png
-    location: Magden, CH
-  - role: Web Developer
-    dates:
-      from: Jun 2015
-      to: Dec 2016
-    summary: Launched and managed a full-stack e-commerce platform and digital marketing campaigns.
-    accomplishments:
-      - Implemented a Shopware-based e-commerce platform from scratch, including frontend and visual assets.
-      - Drove early customer acquisition through paid Google Ads and Meta Ads campaigns.
-    categories:
-      Skills:
-        - E-Commerce
-        - Web Development
-        - JavaScript
-        - PHP
-        - Digital Marketing
-    company: Zeus Supplements GmbH
-    companyDescription: Zeus Supplements is a premium provider of high-quality supplements for athletes.
-    logo: /images/companies/zeus-supplements.png
-    location: Muttenz, CH
+- role: DevOps & Software Engineer (full time)
+  company: aXenta AG
+  companyDescription: Axenta is a leading provider of Swiss pension fund software.
+  logo: /images/companies/aXenta.jpg
+  location: Baden-Dättwil, CH
+  dates:
+    from: Apr 2025
+    to: present
+  summary: Own the end-to-end delivery lifecycle and internal platform for a Swiss pension fund software provider.
+  showcasedSkills:
+  - Kubernetes
+  - OpenShift
+  - Jenkins
+  - ArgoCD
+  - GitOps
+  accomplishments:
+  - Modernized and optimized CI/CD pipelines by migrating builds to Linux, implementing a Jenkins shared library, and adopting parallel ephemeral agents reducing build times by 10x.
+  - Designed and implemented containerized delivery for six services, spanning Docker, Jenkins, image versioning in Harbor, and automated GitOps deployments with ArgoCD and Helm across development, test, and production environments.
+  - Owned the end-to-end software delivery lifecycle and internal platform, from developer onboarding and build infrastructure through environments, deployments, and client delivery, replacing manual releases with standardized automation, quality gates, monitoring, and alerting.
+  categories:
+    label: Technologies
+    Stack:
+    - Java
+    - Quarkus
+    - Java Swing
+    - Gradle
+    - CI/CD
+    - Jenkins
+    - Docker
+    - Harbor
+    - Artifactory
+    - Kubernetes
+    - OpenShift
+    - ArgoCD
+    - Flux
+    - Helmcharts
+    - Terraform
+    - Ansible
+    - Playwright
+    - SonarQube
+    - Log4j
+    - Prometheus
+    - Tempo
+    - Loki
+    - Grafana
+    - OAuth 2.0
+    - Keycloak
+    - Linux
+    - Windows Server
+    - Bash
+    - Powershell
+    - Git
+  link: https://www.axenta.ch/
+- role: Fullstack Engineer (full time)
+  company: ELCA Informatik (IIM Solutions)
+  companyDescription: ELCA IIM delivers smart document management, ECM, and process automation.
+  logo: /images/companies/elca.png
+  location: Zürich Altstetten, CH
+  dates:
+    from: Oct 2022
+    to: Mar 2025
+  summary: Modernized enterprise document management systems, from frontend rewrites to backend and database performance.
+  showcasedSkills:
+  - Java
+  - Spring
+  - Angular
+  - PostgreSQL
+  - OpenShift
+  accomplishments:
+  - Drove the modernization of an ETL tool's UI by transitioning from Vaadin to Angular, enhancing API integration and decoupling the frontend from the backend.
+  - Optimized database queries and system architecture, improving performance by 37x and transitioning the backend from Java EE to Spring for better performance and maintainability.
+  - Led the engineering of a migration platform that enabled retirement of a legacy MongoDB system, transforming inconsistent source data into a structured PostgreSQL model across 10M+ documents.
+  - Designed and deployed a new license & contract management solution in Java and Angular, modeling complex internal licensing structures, mappings, and pricing rules.
+  categories:
+    label: Technologies
+    Stack:
+    - Java
+    - Spring
+    - JPA
+    - Hibernate
+    - Maven
+    - Angular
+    - RxJS
+    - HTML
+    - SCSS
+    - Vaadin
+    - Karma
+    - PostgreSQL
+    - Postgres
+    - Flyway
+    - Elasticsearch
+    - Kibana
+    - S3-Compatible Storage (MinIO)
+    - Docker
+    - OpenShift
+    - Jenkins
+    - Linux
+    - Azure AD
+  link: https://www.elca.ch/
+- role: Full-Stack & DevOps Engineer (part time)
+  company: Webmo
+  companyDescription: Webmo delivers web hosting, webdesign, and strategic marketing solutions.
+  logo: /images/companies/webmo.png
+  location: Olten, CH
+  dates:
+    from: Jan 2020
+    to: present
+  summary: Build and operate the hosting platform behind client websites, from WordPress to a self-managed Kubernetes cluster.
+  showcasedSkills:
+  - Kubernetes
+  - Linux
+  - Nginx
+  - WordPress
+  - Hetzner
+  accomplishments:
+  - Developed, tailored, and hosted WordPress websites and plugins for 20+ clients.
+  - Built a self-hosted WordPress platform on Linux and Nginx at Hetzner, centralizing site management and automating provisioning and deployment through custom scripts.
+  - Evolved the platform into a self-managed, multi-node Kubernetes cluster on Hetzner, supporting multiple client websites and applications with integrated monitoring, backups, secrets management, certificate management, and a private image registry.
+  categories:
+    label: Technologies
+    Stack:
+    - JavaScript
+    - HTML
+    - CSS
+    - PHP
+    - WordPress
+    - Directus
+    - Nginx
+    - Linux
+    - Bash
+    - Kubernetes
+    - Harbor
+    - Velero
+    - Authentik
+    - Hetzner
+    - Marketing
+    - Sales
+  link: https://webmo.ch/
+- role: Co-Founder & Growth Lead
+  company: Mount Vantage GmbH
+  companyDescription: Mount Vantage is a digital media holding company behind popular YouTube brands.
+  logo: /images/companies/mount-vantage.png
+  location: Magden, CH
+  dates:
+    from: Dec 2014
+    to: Sep 2022
+  summary: Co-founded and scaled a digital media business to millions of subscribers and a self-running operating model.
+  showcasedSkills:
+  - Content Strategy
+  - Marketing
+  - Managing People
+  accomplishments:
+  - Grew YouTube channel to 3.9M subscribers and over 1.2B views and drove revenue to a peak of 35'000CHF/month with content strategy.
+  - Built a scalable operating model by hiring and delegating core responsibilities and automating recurring workflows, significantly reducing day-to-day involvement.
+  categories:
+    label: Technologies
+    Stack:
+    - Content Strategy
+    - Marketing
+    - Managing People
+    - Photoshop
+    - Adobe After Effects
+- role: Web Developer (full time)
+  company: Zeus Supplements GmbH
+  companyDescription: Zeus Supplements is a premium provider of high-quality supplements for athletes.
+  logo: /images/companies/zeus-supplements.png
+  location: Muttenz, CH
+  dates:
+    from: Jun 2015
+    to: Dec 2016
+  summary: Built and marketed a supplement e-commerce platform end to end.
+  showcasedSkills:
+  - Shopware
+  - JavaScript
+  - Marketing
+  accomplishments:
+  - Developed a Shopware e-commerce website including visuals from ground up.
+  - Launched marketing campaigns using Google-Ads and Meta-Ads.
+  categories:
+    label: Technologies
+    Stack:
+    - JavaScript
+    - HTML
+    - CSS
+    - Shopware
+    - Marketing

@@ -25,6 +25,7 @@ interface TimelineDetailsProps {
 function TimelineDetails({ accomplishments, categories: categoriesData }: TimelineDetailsProps) {
   const { label = 'Skills', ...categories } = categoriesData || {};
   const hasCategories = Object.keys(categories).length > 0;
+  const isSingleGroup = Object.keys(categories).length === 1;
 
   return (
     <div className="pr-4 pb-6 pt-4">
@@ -52,7 +53,12 @@ function TimelineDetails({ accomplishments, categories: categoriesData }: Timeli
             {Object.entries(categories).map(([category, items]) => (
               Array.isArray(items) && (
                 <div key={category} className="text-xs">
-                  <span className="text-gray-400 font-medium">{category}:</span>{' '}
+                  {/* A single group needs no name — the heading already says it. */}
+                  {!isSingleGroup && (
+                    <>
+                      <span className="text-gray-400 font-medium">{category}:</span>{' '}
+                    </>
+                  )}
                   <span className="text-gray-400">{items.join(', ')}</span>
                 </div>
               )
