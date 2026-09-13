@@ -247,7 +247,9 @@ interface TimelineProps {
 }
 
 export default function Timeline({ items }: TimelineProps) {
-  const [expandedIndex, setExpandedIndex] = useState<number>(0);
+  // -1 = everything collapsed. Cards start closed so the list is scannable;
+  // accomplishments appear on click.
+  const [expandedIndex, setExpandedIndex] = useState<number>(-1);
 
   return (
     <div className="max-w-5xl mx-auto">

@@ -17,9 +17,9 @@ items:
   - PostgreSQL
   - Web Scraping
   accomplishments:
-  - Built a two-speed design where an LLM authors and repairs per-site extractors at setup time, while the daily crawl stays fully deterministic and LLM-free — keeping recurring runs free of API spend and non-determinism.
+  - Built a two-speed design where an LLM authors and repairs per-site extractors at setup time, while the daily crawl stays fully deterministic and LLM-free, keeping recurring runs free of API spend and non-determinism.
   - Added an agentic authoring path where the model drives a real browser through a tool surface (navigate, query, screenshot) and must verify its own selectors against the live DOM before submitting them.
-  - Probed cheaper sources first — iCal feeds, then schema.org structured data — so most sites onboard without any model call at all.
+  - Probed cheaper sources first (iCal feeds, then schema.org structured data) so most sites onboard without any model call at all.
   - Normalized and deduplicated events across overlapping sites using fuzzy matching and source-tier priority, keeping a current snapshot in Postgres.
   - 'Made the crawler self-repairing: when a layout change breaks selectors, the site is re-snapshotted and the extractor re-authored, and only promoted if it beats the previous baseline.'
   - Recovered fields that exist only inside flyer images by OCR-ing them locally with Tesseract, keeping the crawl path deterministic.
