@@ -3,7 +3,7 @@
  *
  * This file is the single declaration of the collections; `directus-setup.mjs`
  * applies it and `lib/directus.ts` maps the rows back onto `lib/types.ts`.
- * Changing a field here means changing the mapper too — see README.
+ * Changing a field here means changing the mapper too. See README.
  */
 
 // ---------------------------------------------------------------------------
@@ -122,7 +122,7 @@ export const COLLECTIONS = [
     meta: {
       singleton: true,
       icon: 'tune',
-      note: 'Hero, metadata, theme, footer and resume side-column.',
+      note: 'Hero, metadata, theme and footer.',
       display_template: '{{hero_name}}',
     },
     fields: [
@@ -150,24 +150,6 @@ export const COLLECTIONS = [
       str('social_email', { name: 'Contact email', width: 'half' }),
       str('social_owner_name', { name: 'Footer owner name', width: 'half' }),
 
-      text('resume_subtitle', { name: 'Resume subtitle' }),
-      repeater('resume_summary', [['text', 'Paragraph', 'text']], {
-        name: 'Resume summary',
-        template: '{{text}}',
-      }),
-      repeater('resume_technical_skills', [['text', 'Line', 'text']], {
-        name: 'Technical skills',
-        note: 'One line per group, e.g. "Backend: Java, Spring, …"',
-        template: '{{text}}',
-      }),
-      repeater('resume_soft_skills', [['text', 'Line', 'text']], {
-        name: 'Soft skills',
-        template: '{{text}}',
-      }),
-      repeater('resume_languages', [['name', 'Language'], ['level', 'Level']], {
-        name: 'Languages',
-        template: '{{name}} — {{level}}',
-      }),
     ],
   },
 
@@ -187,13 +169,9 @@ export const COLLECTIONS = [
         name: 'Slug',
         required: true,
         width: 'half',
-        note: 'URL hash and resume key, e.g. "experience"',
+        note: 'URL hash, e.g. "experience"',
       }),
       str('label', { name: 'Label', required: true, width: 'half' }),
-      int('resume_max_items', {
-        name: 'Max items on resume',
-        note: 'Leave empty for no limit',
-      }),
     ],
   },
 
@@ -201,9 +179,9 @@ export const COLLECTIONS = [
     collection: 'portfolio_items',
     meta: {
       icon: 'timeline',
-      note: 'Timeline entries — jobs, studies, projects, certifications.',
+      note: 'Timeline entries: jobs, studies, projects, certifications.',
       sort_field: 'sort',
-      display_template: '{{role}} — {{company}}',
+      display_template: '{{role}} · {{company}}',
     },
     fields: [
       pk(),

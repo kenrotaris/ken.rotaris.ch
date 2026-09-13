@@ -6,27 +6,6 @@ export interface Portfolio<T = TimelineItem> {
   footer?: Footer;
   theme?: ThemeConfig;
   metadata?: SiteMetadata;
-  resume?: ResumeSection;
-}
-
-export interface ResumeSection {
-  subtitle?: string;
-  'left-section'?: {
-    summary?: string[];
-    technicalSkills?: string[];
-    softSkills?: string[];
-    languages?: Language[];
-  };
-}
-
-export interface TechnicalSkillGroup {
-  category: string;
-  skills: string[];
-}
-
-export interface Language {
-  name: string;
-  level: string;
 }
 
 export interface SiteMetadata {
@@ -57,7 +36,6 @@ export interface Tab<T = TimelineItem> {
   /** Directus row id; absent when loaded from YAML. */
   directusId?: string;
   label: string;
-  resumeMaxItems?: number; // Optional limit for resume rendering (e.g., 3 for projects)
   items: T[];
 }
 
@@ -123,6 +101,5 @@ export interface SiteConfig {
 
 export interface TabFile {
   label: string;
-  resumeMaxItems?: number;
   items: TimelineItem[];
 }

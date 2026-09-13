@@ -95,7 +95,7 @@ async function loadSplitYaml(
   portfolioPath: string,
   tabsDir: string
 ): Promise<NormalizedPortfolio> {
-  // 1. Load portfolio.yaml (contains hero, metadata, footer, theme, resume)
+  // 1. Load portfolio.yaml (contains hero, metadata, footer, theme)
   const portfolioData = yaml.load(await fs.promises.readFile(portfolioPath, 'utf8')) as Portfolio;
 
   // 2. Load all tab files from tabs/
@@ -112,7 +112,6 @@ async function loadSplitYaml(
     tabs.push({
       id: tabId,
       label: tabData.label,
-      resumeMaxItems: tabData.resumeMaxItems,
       items: (tabData.items || []).map(normalizeTimelineItem),
     });
   }
@@ -133,7 +132,6 @@ async function loadSplitYaml(
     metadata: portfolioData.metadata,
     footer: portfolioData.footer,
     theme: portfolioData.theme,
-    resume: portfolioData.resume,
     tabs,
   };
 }
@@ -165,7 +163,6 @@ async function loadMonolithicYaml(): Promise<NormalizedPortfolio> {
     tabs,
     footer: validatedData.footer,
     theme: validatedData.theme || DEFAULT_PORTFOLIO.theme,
-    resume: validatedData.resume,
   };
 }
 
@@ -189,11 +186,10 @@ export async function fetchPortfolio(): Promise<NormalizedPortfolio> {
         metadata: remote.metadata,
         footer: remote.footer,
         theme: remote.theme,
-        resume: remote.resume,
         tabs: normalizePortfolioData(remote.tabs),
       };
     }
-    console.warn('[data] Directus returned no tabs — using YAML');
+    console.warn('[data] Directus returned no tabs, using YAML');
   }
 
   try {

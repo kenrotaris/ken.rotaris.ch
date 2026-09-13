@@ -53,7 +53,7 @@ function TimelineDetails({ accomplishments, categories: categoriesData }: Timeli
             {Object.entries(categories).map(([category, items]) => (
               Array.isArray(items) && (
                 <div key={category} className="text-xs">
-                  {/* A single group needs no name — the heading already says it. */}
+                  {/* A single group needs no name, the heading already says it. */}
                   {!isSingleGroup && (
                     <>
                       <span className="text-gray-400 font-medium">{category}:</span>{' '}

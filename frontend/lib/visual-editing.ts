@@ -2,7 +2,7 @@
  * `data-directus` attribute builder for the Directus visual editor.
  *
  * The attribute format is a simple `key:value;` string, so it is generated here
- * rather than with `setAttr` from @directus/visual-editing — that keeps the
+ * rather than with `setAttr` from @directus/visual-editing, which keeps the
  * library out of the client bundle for ordinary visitors. The overlay itself is
  * dynamically imported by <VisualEditing>, only when the page is framed.
  */
@@ -17,7 +17,7 @@ export interface VisualEditRef {
 
 /**
  * Serializes to e.g. `collection:portfolio_items;item:abc;mode:popover;fields:role`
- * — the exact shape `setAttr` produces, verified against the 2.1.0 build.
+ * This is the exact shape `setAttr` produces, verified against the 2.1.0 build.
  */
 export function visualEditAttr(
   ref: VisualEditRef | null | undefined,
@@ -42,7 +42,7 @@ export function visualEditAttr(
 }
 
 export interface VisualEditHandle {
-  /** Opens the whole row — the only option for repeaters like accomplishments. */
+  /** Opens the whole row: the only option for repeaters like accomplishments. */
   item: (mode?: VisualEditMode, fields?: string | string[]) => string | undefined;
   /** Inline edit of one field. */
   field: (field: string, mode?: VisualEditMode) => string | undefined;

@@ -20,31 +20,3 @@ theme:
     accent: '#624AFF'
     background: '#4D00FF'
   timezone: CET
-resume:
-  subtitle: Bachelor in Computer Science | DevOps, Backend & Frontend Development
-  left-section:
-    summary:
-    - DevOps / Full-Stack Engineer with experience in Java-based backend systems, Kubernetes/OKD, CI/CD and GitOps. Built and operated containerized delivery platforms using Jenkins, Docker, Argo CD, Helm and Terraform, including initiatives that reduced build times 10x. Strong hands-on background in Java, Spring/Quarkus, Angular, PostgreSQL, Linux and production automation.
-    technicalSkills:
-    - 'DevOps: Docker, Kubernetes, OKD/OpenShift, Jenkins, CI/CD, ArgoCD, Flux, HelmCharts, Nginx, Grafana, Harbor, JFrog, S3 Lifecycle (MinIO), Azure AD, Linux, Windows, Elasticsearch, OpenSearch, Kibana, Postman, SonarQube, Velero, Terraform, Hashicorp'
-    - 'Back-End: Java, Spring, Quarkus, Hibernate, JPA, REST APIs, JUnit, Mockito, MapStruct, QueryDSL, OpenAPI, Flyway, SLF4J, Jakarta EE, Maven, Gradle, PostgreSQL, MySQL, MongoDB, Oracle, H2'
-    - 'Front-End: Angular, TypeScript, HTML, SCSS, React, RxJS, Karma, Jasmine, Cypress, Playwright'
-    - 'AI & Automation: AI Tools for Enhanced Development (Claude Code etc.), Python, Bash/Shell/Powershell Scripting'
-    - 'Tools: IntelliJ, VSCode, Git, GitHub'
-    - 'Methods & Delivery: Agile, Scrum, Kanban, IT project management'
-    softSkills:
-    - Robust and driven, eager to learn, persistent, result-oriented, innovative and out-of-the box thinking.
-    - Team player with strong interpersonal skills and the ability to work independently.
-    languages:
-    - name: German
-      level: fluent
-    - name: English
-      level: fluent
-    - name: Dutch
-      level: fluent
-    - name: French
-      level: intermediate
-    - name: Swiss German
-      level: native
-    - name: Limburgish
-      level: native

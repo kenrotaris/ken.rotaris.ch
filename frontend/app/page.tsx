@@ -15,7 +15,7 @@ export default async function Home() {
       <HomeClient
         data={data}
         // The visual editor validates that messages come from this exact
-        // origin, so it must be the Studio that frames us — normally the same
+        // origin, so it must be the Studio that frames us. Normally the same
         // host as the content API, but not necessarily.
         directusUrl={process.env.VISUAL_EDITOR_ORIGIN ?? process.env.DIRECTUS_URL}
       />

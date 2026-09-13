@@ -157,7 +157,7 @@ async function ensurePolicy(name, { appAccess }) {
 }
 
 async function ensurePermission(policyId, collection, action) {
-  if (!policyId) return; // dry run — the policy does not exist yet
+  if (!policyId) return; // dry run, the policy does not exist yet
   const filter =
     `?filter[policy][_eq]=${policyId}` +
     `&filter[collection][_eq]=${collection}` +
@@ -296,7 +296,7 @@ async function phaseSeed() {
   const force = process.argv.includes('--force');
 
   if (existing.length && !force) {
-    console.log(`  ${existing.length} tab(s) already present — skipping.`);
+    console.log(`  ${existing.length} tab(s) already present, skipping.`);
     console.log('  Pass --force to delete them and re-import from YAML.');
     return;
   }
@@ -353,7 +353,7 @@ console.log(APPLY ? 'mode: APPLY (writes)' : 'mode: dry run (no writes)');
 const toRun = PHASE === 'all' ? ['schema', 'access', 'settings', 'verify'] : [PHASE];
 for (const name of toRun) {
   if (!phases[name]) {
-    console.error(`unknown phase "${name}" — use schema, access, seed, verify or all`);
+    console.error(`unknown phase "${name}", use schema, access, seed, verify or all`);
     process.exit(1);
   }
   if (name === 'verify' && !APPLY && planned > 0) {

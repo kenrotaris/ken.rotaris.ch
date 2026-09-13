@@ -15,7 +15,6 @@ const lines = (arr) => (arr ?? []).map((text) => ({ text }));
 /** @returns {{settings: object, tabs: object[], itemsByTabSlug: Record<string, object[]>}} */
 export function buildRows(dataDir = path.join(process.cwd(), 'public', 'data')) {
   const portfolio = load(path.join(dataDir, 'portfolio.yaml'));
-  const left = portfolio.resume?.['left-section'] ?? {};
 
   const settings = {
     hero_name: portfolio.hero?.name,
@@ -33,11 +32,6 @@ export function buildRows(dataDir = path.join(process.cwd(), 'public', 'data')) 
     social_github: portfolio.footer?.social?.github,
     social_email: portfolio.footer?.social?.email,
     social_owner_name: portfolio.footer?.social?.ownerName,
-    resume_subtitle: portfolio.resume?.subtitle,
-    resume_summary: lines(left.summary),
-    resume_technical_skills: lines(left.technicalSkills),
-    resume_soft_skills: lines(left.softSkills),
-    resume_languages: (left.languages ?? []).map((l) => ({ name: l.name, level: l.level })),
   };
 
   const filenames = fs
@@ -60,7 +54,6 @@ export function buildRows(dataDir = path.join(process.cwd(), 'public', 'data')) 
       slug,
       label: data.label,
       sort: tabIndex,
-      resume_max_items: data.resumeMaxItems ?? null,
     });
 
     itemsByTabSlug[slug] = (data.items ?? []).map((item, i) => {

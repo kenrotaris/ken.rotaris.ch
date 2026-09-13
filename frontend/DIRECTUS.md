@@ -22,7 +22,7 @@ Field-level notes worth knowing:
 - **Logos take either form.** `Logo (upload)` wins over `Logo (path)`, so a logo
   can be replaced in Directus without touching the repo. Paths stay valid for
   the images already in `public/images/`.
-- **Dates are free text** — `Nov 2026`, `2020`, `Present`. A start date in the
+- **Dates are free text**: `Nov 2026`, `2020`, `Present`. A start date in the
   future renders as a `PLANNED` badge (see `calculateDuration` in `lib/utils.ts`).
 
 ## Applying the schema
@@ -38,7 +38,7 @@ npm run directus:apply     # creates collections, fields, relations, policies
 npm run directus:verify    # re-checks that every field exists
 ```
 
-Both phases are idempotent and strictly additive — existing collections,
+Both phases are idempotent and strictly additive. Existing collections,
 fields and permissions are left alone and nothing is ever deleted. That matters
 because `edit.webmo.ch` is the shared webmo platform instance.
 
@@ -80,13 +80,13 @@ What is clickable:
 | Anywhere else on a timeline card | the whole entry in a drawer |
 
 Repeaters (`accomplishments`, `categories`) cannot be clicked element by
-element — that is why the card as a whole opens a drawer.
+element, which is why the card as a whole opens a drawer.
 
 Two things this depends on:
 
 - **`Content-Security-Policy: frame-ancestors`** must include the Studio origin.
   It replaces `X-Frame-Options`, which has no third-party allow-list. The origin
-  comes from `VISUAL_EDITOR_ORIGIN`, defaulting to the `DIRECTUS_URL` origin —
+  comes from `VISUAL_EDITOR_ORIGIN`, defaulting to the `DIRECTUS_URL` origin.
   they are separate because the editor validates that postMessage traffic comes
   from the Studio origin exactly, which need not be the content API host.
 - **The publish flow**, because pages are statically cached. On save the overlay
@@ -97,12 +97,27 @@ Ordinary visitors never pay for this: `@directus/visual-editing` is dynamically
 imported behind a `window.self !== window.top` check, so it is a lazy chunk that
 is only fetched inside the Studio frame.
 
+## Keeping the YAML fallback in sync
+
+Editing in Directus leaves the repo YAML behind, and that YAML is what the image
+ships with: it is served on the first request after a pod restart and whenever
+Directus is unreachable. `directus:pull` closes that gap.
+
+```bash
+npm run directus:pull            # report drift, write nothing
+npm run directus:pull -- --write # update public/data/*.yaml
+```
+
+It compares parsed content rather than raw text, so key order and quoting never
+show up as false drift. Run it before a release and commit whatever it changes.
+
 ## Changing the content shape
 
 The shape now lives in three places, and all three must move together:
 
-1. `lib/types.ts` — the TypeScript shape the components consume.
-2. `scripts/directus-schema.mjs` — the Directus fields.
-3. `lib/directus.ts` — the mapping between them.
+1. `lib/types.ts`: the TypeScript shape the components consume.
+2. `scripts/directus-schema.mjs`: the Directus fields.
+3. `lib/directus.ts`: the mapping Directus -> app.
+4. `scripts/directus-pull.mjs`: the mapping back, Directus -> YAML.
 
 Run `npm run directus:plan` after step 2 to see exactly what would change.

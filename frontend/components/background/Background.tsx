@@ -62,7 +62,7 @@ function supportsWebGL(): boolean {
 /**
  * A fullscreen fragment shader is not worth its cost on a phone, a metered
  * connection, or a low-end machine. Those visitors get the static gradient,
- * which reads as the same design at a fraction of the main-thread cost —
+ * which reads as the same design at a fraction of the main-thread cost:
  * compiling and running the shader was worth ~1.5s of main-thread work and
  * most of the page's blocking time on a mid-range device.
  */
@@ -194,7 +194,7 @@ export default function Background({ accentColor }: BackgroundProps) {
 
         if (!cancelled) setLoaded(true)
       } catch (err) {
-        // No fog is a fine outcome — the gradient below is already painted.
+        // No fog is a fine outcome, the gradient below is already painted.
         console.warn('[Background] fog effect unavailable:', err)
         effectRef.current = null
       }

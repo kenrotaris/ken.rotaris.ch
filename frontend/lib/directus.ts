@@ -3,12 +3,12 @@
  *
  * Maps the collections declared in scripts/directus-schema.mjs onto the same
  * `Portfolio` shape the YAML loader produces, so everything downstream
- * (normalization, resume, structured data) is unchanged. When Directus is not
+ * (normalization and structured data) is unchanged. When Directus is not
  * configured or unreachable this returns null and the caller falls back to the
  * YAML on disk.
  */
 
-import { Portfolio, Tab, TimelineItem, Language } from './types';
+import { Portfolio, Tab, TimelineItem } from './types';
 
 const DIRECTUS_URL = (process.env.DIRECTUS_URL ?? '').replace(/\/+$/, '');
 const DIRECTUS_TOKEN = process.env.DIRECTUS_TOKEN ?? '';
@@ -16,7 +16,7 @@ const DIRECTUS_TOKEN = process.env.DIRECTUS_TOKEN ?? '';
 /**
  * How long a rendered page may serve stale Directus content, in seconds.
  * Next's segment config cannot read this through an import, so `app/page.tsx`
- * repeats the literal — keep the two in sync.
+ * repeats the literal, so keep the two in sync.
  */
 export const DIRECTUS_REVALIDATE = 300;
 
@@ -29,7 +29,6 @@ export function isDirectusConfigured(): boolean {
 // ---------------------------------------------------------------------------
 
 interface RepeaterText { text?: string }
-interface RepeaterLanguage { name?: string; level?: string }
 interface RepeaterCategory { category?: string; skills?: string }
 
 interface SettingsRow {
@@ -40,14 +39,9 @@ interface SettingsRow {
   theme_accent?: string; theme_background?: string; theme_timezone?: string;
   social_linkedin?: string; social_github?: string;
   social_email?: string; social_owner_name?: string;
-  resume_subtitle?: string;
-  resume_summary?: RepeaterText[];
-  resume_technical_skills?: RepeaterText[];
-  resume_soft_skills?: RepeaterText[];
-  resume_languages?: RepeaterLanguage[];
 }
 
-interface TabRow { id: string; slug: string; label: string; resume_max_items?: number | null }
+interface TabRow { id: string; slug: string; label: string }
 
 interface ItemRow {
   id?: string;
@@ -72,6 +66,7 @@ function splitList(value?: string): string[] {
   if (!value) return [];
   return value.split(',').map((s) => s.trim()).filter(Boolean);
 }
+
 
 /** Repeater rows -> the plain string arrays the rest of the app expects. */
 function repeaterText(rows?: RepeaterText[]): string[] {
@@ -118,11 +113,6 @@ function mapItem(row: ItemRow): TimelineItem {
   };
 }
 
-function mapLanguages(rows?: RepeaterLanguage[]): Language[] {
-  return (rows ?? [])
-    .filter((r) => r.name && r.level)
-    .map((r) => ({ name: r.name!.trim(), level: r.level!.trim() }));
-}
 
 // ---------------------------------------------------------------------------
 // Fetching
@@ -139,7 +129,7 @@ async function query<T>(path: string): Promise<T> {
 
 /**
  * Returns the portfolio from Directus, or null when Directus is not configured
- * or the request fails — the caller then uses the YAML on disk.
+ * or the request fails. The caller then uses the YAML on disk.
  */
 export async function fetchPortfolioFromDirectus(): Promise<Portfolio | null> {
   if (!isDirectusConfigured()) return null;
@@ -155,7 +145,6 @@ export async function fetchPortfolioFromDirectus(): Promise<Portfolio | null> {
       id: tab.slug,
       directusId: tab.id,
       label: tab.label,
-      resumeMaxItems: tab.resume_max_items ?? undefined,
       items: itemRows.filter((item) => item.tab === tab.id).map(mapItem),
     }));
 
@@ -189,17 +178,6 @@ export async function fetchPortfolioFromDirectus(): Promise<Portfolio | null> {
         },
         timezone: settings.theme_timezone || undefined,
       },
-      resume: settings.resume_subtitle
-        ? {
-            subtitle: settings.resume_subtitle,
-            'left-section': {
-              summary: repeaterText(settings.resume_summary),
-              technicalSkills: repeaterText(settings.resume_technical_skills),
-              softSkills: repeaterText(settings.resume_soft_skills),
-              languages: mapLanguages(settings.resume_languages),
-            },
-          }
-        : undefined,
       tabs,
     };
   } catch (e) {

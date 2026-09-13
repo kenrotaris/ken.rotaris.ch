@@ -12,7 +12,8 @@
     "lint": "eslint",
     "directus:plan": "node --env-file-if-exists=.env.local scripts/directus-setup.mjs --phase=all",
     "directus:apply": "node --env-file-if-exists=.env.local scripts/directus-setup.mjs --phase=all --apply",
-    "directus:verify": "node --env-file-if-exists=.env.local scripts/directus-setup.mjs --phase=verify --apply"
+    "directus:verify": "node --env-file-if-exists=.env.local scripts/directus-setup.mjs --phase=verify --apply",
+    "directus:pull": "node --env-file-if-exists=.env.local scripts/directus-pull.mjs"
   },
   "dependencies": {
     "@directus/visual-editing": "^2.1.0",
